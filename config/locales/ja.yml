@@ -1,0 +1,7 @@
+ja:
+  enums:
+    post:
+      category:
+        normal: "通常の投稿"
+        recruitment: "募集"
+        closed: "締め切りました"

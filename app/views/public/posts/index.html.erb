@@ -1,0 +1,19 @@
+<h1>投稿一覧ページです</h1>
+<%= form_with model:@new_post, local: true do |f|%>
+<%= f.text_field :content%>
+<%= f.select :category, [["通常の投稿", "normal"],["募集投稿", "recruitment"]] %>
+<%= f.submit "投稿する"%>
+<% end %>
+
+<% @posts.each do |post|%>
+<%= link_to post_path(post) do%>
+<div class="border">
+  <p>名前：<%= post.member.name %></p>
+  <p>投稿文：<%= post.content %></p>
+  <p>カテゴリ：<%= post.category %></p>
+  <%= link_to "削除", post_path(post), method: :delete%>
+</div>
+<% end %>
+<% end %>
+
+
