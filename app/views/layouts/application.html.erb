@@ -15,6 +15,7 @@
       <% if member_signed_in? %>
       <%= link_to "ログアウト", destroy_member_session_path, method: :delete%>
       <%= link_to "マイページ", member_path(current_member) %>
+      <%= link_to "投稿一覧", posts_path %>
       <% else %>
       <%= link_to "アバウト", about_path %>
       <%= link_to "新規登録", new_member_registration_path %>

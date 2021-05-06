@@ -19,6 +19,7 @@ Rails.application.routes.draw do
    root :to => "homes#top"
    get "/about" => "homes#about"
    resources :members,only:[:show,:edit,:update]
+   resources :posts,only:[:index,:show,:create,:destroy]
   end
 
 end
