@@ -1,0 +1,12 @@
+<h1>ゲーム一覧ページです</h1>
+<%= link_to "ゲームを追加する",new_admin_game_path %>
+<% @games.each do |game|%>
+<%= link_to admin_game_path(game) do %>
+<div class="border">
+  <%= attachment_image_tag game, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "30x30"%>
+  <p>名前：<%= game.name %></p>
+  <p>説明：<%= game.introduction %></p>
+  <%= link_to "編集する", edit_admin_game_path(game) %>
+</div>
+<% end %>
+<% end %>

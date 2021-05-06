@@ -20,6 +20,11 @@ Rails.application.routes.draw do
    get "/about" => "homes#about"
    resources :members,only:[:show,:edit,:update]
    resources :posts,only:[:index,:show,:create,:destroy]
+   resources :games,only:[:index,:show]
+  end
+
+  namespace :admin do
+   resources :games
   end
 
 end
