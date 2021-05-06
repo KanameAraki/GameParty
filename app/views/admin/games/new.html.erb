@@ -1,0 +1,19 @@
+<h1>新規ゲーム登録ページです</h1>
+
+<%= form_with model: [:admin,@game], local: true do |f|%>
+<div class="field">
+  <%= f.label :image %>
+  <%= f.attachment_field :image %>
+</div>
+<div class="field">
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+</div>
+<div class="field">
+  <%= f.label :introduction %>
+  <%= f.text_field :introduction %>
+</div>
+<div class="field">
+  <%= f.submit "ゲームを追加する" %>
+</div>
+<% end %>

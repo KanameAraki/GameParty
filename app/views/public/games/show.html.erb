@@ -1,0 +1,6 @@
+<h1>ゲーム詳細ページです</h1>
+<div class="">
+  <%= attachment_image_tag @game, :image, :fill, 40, 40, format: "jpeg", fallback: "game_icon.jpeg",size: "200x200"%>
+  <p>名前：<%= @game.name %></p>
+  <p>紹介文：<%= @game.introduction %></p>
+</div>
