@@ -1,0 +1,9 @@
+<h1>メンバー詳細ページです</h1>
+<div class="">
+  <%= attachment_image_tag @member, :image, :fill, 40, 40, format: "jpeg", fallback: "game_icon.jpeg",size: "200x200"%>
+  <p>名前：<%= @member.name %></p>
+  <p>紹介文：<%= @member.introduction %></p>
+  <% if current_member %>
+  <%= link_to "編集",edit_member_path(current_member) %>
+  <% end %>
+</div>

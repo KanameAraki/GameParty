@@ -5,7 +5,7 @@ Rails.application.routes.draw do
      post "/admin/sign_in", to: "admin/sessions#create", as: :admin_session
      delete "/admin/sign_out", to: "admin/sessions#destroy", as: :destroy_admin_session
    end
-  
+
   devise_for :members, skip: :all
    devise_scope :member do
      get "/members/sign_up", to: "public/registrations#new", as: :new_member_registration
@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   scope module: :public do
    root :to => "homes#top"
    get "/about" => "homes#about"
+   resources :members,only:[:show,:edit,:update]
   end
-  
+
 end
