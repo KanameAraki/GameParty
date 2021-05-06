@@ -15,4 +15,9 @@ Rails.application.routes.draw do
      delete "/members/sign_out", to: "public/sessions#destroy", as: :destroy_member_session
    end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  scope module: :public do
+   root :to => "homes#top"
+   get "/about" => "homes#about"
+  end
+  
 end
