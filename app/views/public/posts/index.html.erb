@@ -2,6 +2,9 @@
 <%= form_with model:@new_post, local: true do |f|%>
 <%= f.text_field :content%>
 <%= f.select :category, [["通常の投稿", "normal"],["募集投稿", "recruitment"]] %>
+
+<%= f.collection_select(:game_id, @playing_games, :game_id, :game_id) %>
+
 <%= f.submit "投稿する"%>
 <% end %>
 
@@ -10,10 +13,10 @@
 <div class="border">
   <p>名前：<%= post.member.name %></p>
   <p>投稿文：<%= post.content %></p>
-  <p>カテゴリ：<%= post.category %></p>
+  <% if post.category != "normal" %>
+  <p>カテゴリ：<%= post.category_i18n %></p>
+  <% end %>
   <%= link_to "削除", post_path(post), method: :delete%>
 </div>
 <% end %>
 <% end %>
-
-
