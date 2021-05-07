@@ -18,7 +18,10 @@ Rails.application.routes.draw do
   scope module: :public do
    root :to => "homes#top"
    get "/about" => "homes#about"
-   resources :members,only:[:show,:edit,:update]
+   resources :members,only:[:show,:edit,:update] do
+    resource :playing_games,only:[:create,:destroy]
+    get "/members/member_id/playing_games/index", to: "public/playing_games#index", as: :playing_games_index
+   end
    resources :posts,only:[:index,:show,:create,:destroy]
    resources :games,only:[:index,:show]
   end

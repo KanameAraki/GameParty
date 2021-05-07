@@ -1,9 +1,44 @@
-<h1>メンバー詳細ページです</h1>
-<div class="">
-  <%= attachment_image_tag @member, :image, :fill, 40, 40, format: "jpeg", fallback: "game_icon.jpeg",size: "200x200"%>
-  <p>名前：<%= @member.name %></p>
-  <p>紹介文：<%= @member.introduction %></p>
-  <% if current_member %>
-  <%= link_to "編集",edit_member_path(current_member) %>
-  <% end %>
+<div class="container">
+  <div class="row">
+
+    <div class="col-4">
+      <%= attachment_image_tag @member, :image, :fill, 40, 40, format: "jpeg", fallback: "game_icon.jpeg",size: "200x200"%>
+      <p>名前：<%= @member.name %></p>
+      <p>紹介文：<%= @member.introduction %></p>
+      <% if current_member == @member %>
+      <%= link_to "編集",edit_member_path(current_member) %>
+      <% end %>
+      <div class="">
+        <p>プレイ中のゲーム：<%= @member.games.count %>個</p>
+        <% @member.games.each do |game| %>
+          <%= link_to game_path(game) do %>
+            <p><%= attachment_image_tag game, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "20x20"%><%= game.name %></p>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-8">
+      <% @posts.each do |post| %>
+        <%= link_to post_path(post.id) do%>
+          <div class="border">
+            <%= link_to member_path(@member) do%>
+             <p><%= attachment_image_tag @member, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "20x20"%><%= post.member.name %></p>
+            <% end %>
+            <p>投稿文：<%= post.content %></p>
+            <% if post.category != "normal" %>
+              <p>カテゴリ：<%= post.category_i18n %></p>
+            <% end %>
+            <% if post.member == current_member %>
+             <%= link_to "削除", post_path(post), method: :delete%>
+            <% end %>
+            <% if post.game_id.present? %>
+             <%= link_to Game.find(post.game_id).name, game_path(post.game_id) %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+  </div>
 </div>

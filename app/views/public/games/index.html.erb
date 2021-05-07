@@ -5,6 +5,11 @@
   <%= attachment_image_tag game, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "30x30"%>
   <p>名前：<%= game.name %></p>
   <p>説明：<%= game.introduction %></p>
+    <% if current_member.playing_games.exists?(game_id: game.id) %>
+     <%= link_to "プレイ中のゲームから削除", member_playing_games_path(member_id: current_member.id,game_id: game.id), method: :delete%>
+    <% else %>
+     <%= link_to "プレイ中のゲームに追加", member_playing_games_path(member_id: current_member.id,game_id: game.id), method: :post%>
+    <% end %>
 </div>
 <% end %>
 <% end %>
