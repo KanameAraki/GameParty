@@ -16,7 +16,7 @@ Rails.application.routes.draw do
    end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   scope module: :public do
-   root :to => "homes#top"
+    root :to => "homes#top"
     get "/about" => "homes#about"
     resources :members,only:[:show,:edit,:update] do
      resource :playing_games,only:[:create,:destroy]
@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     end
     resources :posts,only:[:index,:show,:create,:destroy]
     resources :games,only:[:index,:show]
+    resources :chats,only:[:show,:create]
   end
 
   namespace :admin do
