@@ -1,0 +1,4 @@
+<h1>フォロワー一覧</h1>
+<% @member.following_user.each do |following| %>
+<%= following.name %>
+<% end %>

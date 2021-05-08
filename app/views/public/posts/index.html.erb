@@ -11,7 +11,7 @@
 <% @posts.each do |post|%>
 <%= link_to post_path(post) do%>
 <div class="border">
-  <p>名前：<%= post.member.name %></p>
+  <p><%=link_to post.member.name,member_path(post.member)%></p>
   <p>投稿文：<%= post.content %></p>
   <% if post.category != "normal" %>
   <p>カテゴリ：<%= post.category_i18n %></p>
