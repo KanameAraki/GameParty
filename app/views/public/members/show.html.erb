@@ -14,6 +14,11 @@
       <% else %>
       <%= link_to "フォローする",member_relationships_path(@member),method: :post%>
       <% end %>
+
+      <% if current_member.follower.exists?(following_id: @member) && current_member.following.exists?(follower_id: @member)%>
+        <%= link_to "チャットをする", chat_path(@member)%>
+      <% end %>
+
       <div class="border">
         <p>プレイ中のゲーム：<%= @member.games.count %>個</p>
         <% @member.games.each do |game| %>

@@ -1,0 +1,14 @@
+<p><%= @member.name %>さんとのチャット</p>
+
+<% @chats.each do |chat| %>
+  <% if chat.member_id == current_member.id %>
+   <p class="text-align-right"><%= chat.message %></p>
+  <% else %>
+   <p class="text-align-left"><%= chat.message %></p>
+  <% end %>
+<% end %>
+
+<%= form_with model:@chat do |f|%>
+<%= f.text_field :message %>
+<%= f.hidden_field :room_id %>
+<% end %>

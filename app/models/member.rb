@@ -28,4 +28,8 @@ class Member < ApplicationRecord
     following_user.include?(user_id)
   end
 
+  has_many :entries
+  has_many :chats
+  has_many :rooms, through: :entries
+
 end
