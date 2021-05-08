@@ -17,13 +17,16 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   scope module: :public do
    root :to => "homes#top"
-   get "/about" => "homes#about"
-   resources :members,only:[:show,:edit,:update] do
-    resource :playing_games,only:[:create,:destroy]
-    get "/members/member_id/playing_games/index", to: "public/playing_games#index", as: :playing_games_index
-   end
-   resources :posts,only:[:index,:show,:create,:destroy]
-   resources :games,only:[:index,:show]
+    get "/about" => "homes#about"
+    resources :members,only:[:show,:edit,:update] do
+     resource :playing_games,only:[:create,:destroy]
+     get "/playing_games/index", to: "playing_games#index", as: :playing_games_index
+     resource :relationships,only:[:create,:destroy]
+     get "/relationships/followings",to: "relationships#followings", as: :followings_index
+     get "/relationships/followers",to: "relationships#followers", as: :followers_index
+    end
+    resources :posts,only:[:index,:show,:create,:destroy]
+    resources :games,only:[:index,:show]
   end
 
   namespace :admin do

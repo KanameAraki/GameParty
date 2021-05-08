@@ -5,10 +5,16 @@
       <%= attachment_image_tag @member, :image, :fill, 40, 40, format: "jpeg", fallback: "game_icon.jpeg",size: "200x200"%>
       <p>名前：<%= @member.name %></p>
       <p>紹介文：<%= @member.introduction %></p>
+      <p>フォロー<%= link_to @member.follower.count, member_followers_index_path(@member) %></p>
+      <p>フォロワー<%= link_to @member.following.count, member_followings_index_path(@member)%></p>
       <% if current_member == @member %>
       <%= link_to "編集",edit_member_path(current_member) %>
+      <% elsif current_member.follower.exists?(following_id: @member) %>
+      <%= link_to "フォローを外す",member_relationships_path(@member),method: :delete%>
+      <% else %>
+      <%= link_to "フォローする",member_relationships_path(@member),method: :post%>
       <% end %>
-      <div class="">
+      <div class="border">
         <p>プレイ中のゲーム：<%= @member.games.count %>個</p>
         <% @member.games.each do |game| %>
           <%= link_to game_path(game) do %>
