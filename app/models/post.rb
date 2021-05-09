@@ -10,6 +10,13 @@ class Post < ApplicationRecord
   }
 
   has_many :comments
+  
+  has_many :favorites
+  has_many :members, through: :favorites
+  
+  def favorited_by?(member)
+   favorites.where(member_id: member.id).exists?
+  end
 
  
 

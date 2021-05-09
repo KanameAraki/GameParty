@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     end
     resources :posts,only:[:index,:show,:create,:destroy] do
      resources :comments,only:[:create,:destroy]
+     resource :favorites,only:[:create,:destroy]
     end
     resources :games,only:[:index,:show]
     resources :chats,only:[:show,:create]

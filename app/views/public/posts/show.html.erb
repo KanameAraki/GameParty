@@ -3,6 +3,12 @@
 <%= @post.member.name%>
 <%= @post.content %>
 <%= @post.category %>
+<%# binding.pry %>
+<% if current_member.favorites.exists? %>
+<%= link_to "❤️",post_favorites_path(@post),method: :delete%>
+<% else %>
+<%= link_to "♡",post_favorites_path(@post),method: :post%>
+<% end %>
 <%= link_to "削除", post_path(@post), method: :delete%>
 
 <h1>コメント一覧</h1>
