@@ -9,4 +9,8 @@ class Post < ApplicationRecord
     closed:      2,
   }
 
+  has_many :comments
+
+ 
+
 end

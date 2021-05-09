@@ -31,13 +31,14 @@
 
     <div class="col-8">
       <% @posts.each do |post| %>
-        <%= link_to post_path(post.id) do%>
           <div class="border">
             <%= link_to member_path(@member) do%>
              <p><%= attachment_image_tag @member, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "20x20"%><%= post.member.name %></p>
             <% end %>
+        <%= link_to post_path(post.id) do%>
             <p>投稿文：<%= post.content %></p>
             <% if post.category != "normal" %>
+        <% end %>
               <p>カテゴリ：<%= post.category_i18n %></p>
             <% end %>
             <% if post.member == current_member %>
@@ -47,7 +48,6 @@
              <%= link_to Game.find(post.game_id).name, game_path(post.game_id) %>
             <% end %>
           </div>
-        <% end %>
       <% end %>
     </div>
 
