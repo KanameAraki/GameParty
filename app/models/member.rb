@@ -5,6 +5,7 @@ class Member < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
   has_many :playing_games, dependent: :destroy
   has_many :games, through: :playing_games
 
@@ -31,5 +32,7 @@ class Member < ApplicationRecord
   has_many :entries
   has_many :chats
   has_many :rooms, through: :entries
+
+
 
 end

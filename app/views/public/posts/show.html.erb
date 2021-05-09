@@ -1,5 +1,38 @@
 <h1>投稿詳細ページです</h1>
 
+<%= @post.member.name%>
 <%= @post.content %>
 <%= @post.category %>
 <%= link_to "削除", post_path(@post), method: :delete%>
+
+<h1>コメント一覧</h1>
+<%# binding.pry %>
+<% @comments.each do |comment|%>
+  <% if comment.reply == nil %>
+    <div class="border">
+      <%= comment.member.name %>
+      <%= comment.content %>
+
+      <% comment.replies.each do |reply| %>
+        <%= reply.member.name %>
+        <%= reply.content %>
+      <% end %>
+
+      <%= form_with model: [@post,@reply], local:true do |f|%>
+        <%= f.text_field :content %>
+        <%= f.hidden_field :post_id, value: @post.id %>
+        <%= f.hidden_field :reply, value: comment.id %>
+        <%= f.submit "コメントに返信する"%>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+
+
+
+
+
+<%= form_with model: [@post,@new_comment],local:true do |f|%>
+<%= f.text_field :content %>
+<%= f.submit "コメントする" %>
+<% end %>
