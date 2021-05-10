@@ -31,6 +31,9 @@
     </div>
 
     <div class="col-8">
+      <% unless current_member.follower_user.exists?%>
+       <p class="text-center mt-3">フォローした人の投稿一覧です！気になる人をフォローしてみましょう！</p>
+      <% end %>
       <% @posts.each do |post| %>
           <div class="border rounded-lg mt-3">
             <div class="d-flex mt-2 ml-2">
@@ -59,6 +62,9 @@
                 <% else %>
                  <%= link_to "♡",post_favorites_path(post),method: :poste, class:"text-decoration-none"%>
                  <span><%= post.favorites.count %>いいね</span>
+                <% end %>
+                <% if post.comments.exists? %>
+                <span class="ml-4"><%= post.comments.count %> 件のコメント</span>
                 <% end %>
               </div>
               <div class="ml-auto py-1">

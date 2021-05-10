@@ -2,11 +2,9 @@
   <div class="row">
 
     <div class="col-4 mt-3 rounded-lg" style="background-color: #ecf2fd;">
-      <div class="">
-      <%= attachment_image_tag @game, :image, :fill, 40, 40, format: "jpeg", fallback: "game_icon.jpeg",size: "200x200"%>
-      <p>名前：<%= @game.name %></p>
-      <p>紹介文：<%= @game.introduction %></p>
-      </div>
+      <%= attachment_image_tag @game, :image, :fill, 40, 40, format: "jpeg", fallback: "game_icon.jpeg",size: "200x200",class:"rounded-circle border mt-3"%>
+      <h2 class="mt-4"><%= @game.name %></h2>
+      <p><%= @game.introduction %></p>
     </div>
 
     <div class="col-8">
@@ -38,6 +36,9 @@
                 <% else %>
                  <%= link_to "♡",post_favorites_path(post),method: :poste, class:"text-decoration-none"%>
                  <span><%= post.favorites.count %>いいね</span>
+                <% end %>
+                <% if post.comments.exists? %>
+                <span class="ml-4"><%= post.comments.count %> 件のコメント</span>
                 <% end %>
               </div>
               <div class="ml-auto py-1">

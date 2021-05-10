@@ -1,44 +1,74 @@
-<h1>投稿詳細ページです</h1>
+<div class="container">
+  <div class="row">
+    <div class="border rounded-lg mt-3 w-75 mx-auto">
+      <div class="d-flex mt-2 ml-2">
+        <%= link_to member_path(@post.member),class:"text-dark text-decoration-none" do%>
+         <p class="text-decoration-none"><%= attachment_image_tag @post.member, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "30x30",class:"rounded-circle border"%>
+         <%= @post.member.name %></p>
+        <% end %>
+        <div class="ml-auto mr-2">
+         <% if @post.member == current_member && @post.category == "recruitment"  %>
+          <%= link_to post.category_i18n, post_close_path(@post), method: :patch, class:"btn btn-success"%>
+         <% elsif @post.category == "closed" %>
+          <p class="btn border"><%= @post.category_i18n %></p>
+         <% end %>
+        </div>
+      </div>
+      <p class="text-dark ml-4"><%= @post.content %></p>
+      <div class="d-flex border-top">
+        <div class="ml-2 py-1">
+          <% if current_member.favorites.exists?(post_id: @post.id) %>
+           <%= link_to "❤️",post_favorites_path(@post),method: :delete, class:"text-decoration-none"%>
+           <span><%= @post.favorites.count %>いいね</span>
+          <% else %>
+           <%= link_to "♡",post_favorites_path(@post),method: :poste, class:"text-decoration-none"%>
+           <span><%= @post.favorites.count %>いいね</span>
+          <% end %>
+          <% if @post.member == current_member %>
+          <%= link_to "投稿を削除", post_path(@post),method: :delete, class:"ml-4 text-dark"%>
+          <% end %>
+        </div>
+        <div class="ml-auto py-1">
+          <% if @post.game_id.present? %>
+           <%= attachment_image_tag Game.find(@post.game_id), :image, format: "jpeg", fallback: "game_icon.jpeg",size: "20x20",class:"mr-2"%>
+           <%= link_to Game.find(@post.game_id).name, game_path(@post.game_id),class:"text-dark text-decoration-none mr-2"%>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="mx-auto w-75 mt-3">
+    <h5>コメント一覧</h5>
+    <%= form_with model: [@post,@new_comment],local:true do |f|%>
+    <%= f.text_field :content %>
+    <%= f.submit "コメントする" %>
+    <% end %>
+    </div>
+    <% @comments.each do |comment|%>
+    <div class="border rounded-lg mt-3 w-75 mx-auto pt-2 pl-2">
+      <%= link_to member_path(comment.member),class:"text-dark text-decoration-none" do%>
+        <p class="text-decoration-none">
+          <%= attachment_image_tag comment.member, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "30x30",class:"rounded-circle border"%>
+          <%= comment.member.name %>：<% end %>
+          <%= comment.content %>
+        </p>
 
-<%= @post.member.name%>
-<%= @post.content %>
-<%= @post.category %>
-<%# binding.pry %>
-<% if current_member.favorites.exists? %>
-<%= link_to "❤️",post_favorites_path(@post),method: :delete%>
-<% else %>
-<%= link_to "♡",post_favorites_path(@post),method: :post%>
-<% end %>
-<%= link_to "削除", post_path(@post), method: :delete%>
-
-<h1>コメント一覧</h1>
-<%# binding.pry %>
-<% @comments.each do |comment|%>
-  <% if comment.reply == nil %>
-    <div class="border">
-      <%= comment.member.name %>
-      <%= comment.content %>
-
-      <% comment.replies.each do |reply| %>
-        <%= reply.member.name %>
-        <%= reply.content %>
-      <% end %>
-
-      <%= form_with model: [@post,@reply], local:true do |f|%>
-        <%= f.text_field :content %>
+        <%= form_with model: [@post,@reply], local:true do |f|%>
+        <%= f.text_field :content ,class:"mb-2"%>
         <%= f.hidden_field :post_id, value: @post.id %>
         <%= f.hidden_field :reply, value: comment.id %>
         <%= f.submit "コメントに返信する"%>
+        <% end %>
+
+      <% if comment.reply == nil %>
+        <% comment.replies.each do |reply| %>
+        <p class="border-top">
+          <%= attachment_image_tag reply.member, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "30x30",class:"rounded-circle border"%>
+          <%= reply.member.name %>：
+          <%= reply.content %>
+        </p>
+        <% end %>
       <% end %>
     </div>
-  <% end %>
-<% end %>
-
-
-
-
-
-<%= form_with model: [@post,@new_comment],local:true do |f|%>
-<%= f.text_field :content %>
-<%= f.submit "コメントする" %>
-<% end %>
+    <% end %>
+  </div>
+</div>
