@@ -35,6 +35,15 @@ class Public::PostsController < ApplicationController
     post.destroy
   end
 
+  def close
+    post = Post.find(params[:post_id])
+    p post
+    post.category = 2
+    p post
+    post.save
+    redirect_back(fallback_location: root_path)
+  end
+
   private
 
   def post_params

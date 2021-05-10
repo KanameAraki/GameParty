@@ -1,29 +1,28 @@
 <div class="container">
   <div class="row">
 
-    <div class="col-4">
-      <%= attachment_image_tag @member, :image, :fill, 40, 40, format: "jpeg", fallback: "game_icon.jpeg",size: "200x200"%>
-      <p>名前：<%= @member.name %></p>
-      <p>紹介文：<%= @member.introduction %></p>
-      <p>フォロー<%= link_to @member.follower.count, member_followers_index_path(@member) %></p>
-      <p>フォロワー<%= link_to @member.following.count, member_followings_index_path(@member)%></p>
+    <div class="col-4 mt-3 rounded-lg" style="background-color: #ecf2fd;">
+      <%= attachment_image_tag @member, :image, :fill, 40, 40, format: "jpeg", fallback: "game_icon.jpeg",size: "200x200",class:"rounded-circle border mt-3"%>
+      <h2 class="mt-4"><%= @member.name %></h2>
+      <p><%= @member.introduction %></p>
+      <p>フォロー: <%= link_to @member.follower.count, member_followers_index_path(@member) %>　|　フォロワー: <%= link_to @member.following.count, member_followings_index_path(@member)%></p>
       <% if current_member == @member %>
-      <%= link_to "編集",edit_member_path(current_member) %>
+      <%= link_to "編集",edit_member_path(current_member), class:"btn btn-success"%>
       <% elsif current_member.follower.exists?(following_id: @member) %>
-      <%= link_to "フォローを外す",member_relationships_path(@member),method: :delete%>
+      <%= link_to "フォローを外す",member_relationships_path(@member),method: :delete,class:"btn btn-primary"%>
       <% else %>
-      <%= link_to "フォローする",member_relationships_path(@member),method: :post%>
+      <%= link_to "フォローする",member_relationships_path(@member),method: :post,class:"btn btn-primary"%>
       <% end %>
 
       <% if current_member.follower.exists?(following_id: @member) && current_member.following.exists?(follower_id: @member)%>
-        <%= link_to "チャットをする", chat_path(@member)%>
+        <%= link_to "チャットをする", chat_path(@member),class:"btn btn-primary"%>
       <% end %>
 
-      <div class="border">
+      <div class="border my-3">
         <p>プレイ中のゲーム：<%= @member.games.count %>個</p>
         <% @member.games.each do |game| %>
           <%= link_to game_path(game) do %>
-            <p><%= attachment_image_tag game, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "20x20"%><%= game.name %></p>
+            <p><%= attachment_image_tag game, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "20x20"%>　<%= game.name %></p>
           <% end %>
         <% end %>
       </div>
@@ -31,16 +30,29 @@
 
     <div class="col-8">
       <% @posts.each do |post| %>
-          <div class="border">
-            <%= link_to member_path(@member) do%>
-             <p><%= attachment_image_tag @member, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "20x20"%><%= post.member.name %></p>
-            <% end %>
-        <%= link_to post_path(post.id) do%>
-            <p>投稿文：<%= post.content %></p>
-            <% if post.category != "normal" %>
+          <div class="border rounded-lg mt-3">
+
+            <div class="d-flex mt-2 ml-2">
+              <%= link_to member_path(@member),class:"text-dark text-decoration-none" do%>
+               <p class="text-decoration-none"><%= attachment_image_tag @member, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "30x30",class:"rounded-circle border"%>
+               <%= post.member.name %></p>
+              <% end %>
+              <div class="ml-auto mr-2">
+               <% if @member == current_member && post.category == "recruitment"  %>
+                <%= link_to post.category_i18n, post_close_path(post), method: :patch, class:"btn btn-success"%>
+               <% elsif post.category == "closed" %>
+                <p class="btn border"><%= post.category_i18n %></p>
+               <% end %>
+              </div>
+            </div>
+
+
+        <%= link_to post_path(post.id),class:"text-decoration-none" do%>
+            <p class="text-dark ml-4"><%= post.content %></p>
         <% end %>
-              <p>カテゴリ：<%= post.category_i18n %></p>
-            <% end %>
+
+
+
             <% if post.member == current_member %>
              <%= link_to "削除", post_path(post), method: :delete%>
             <% end %>
