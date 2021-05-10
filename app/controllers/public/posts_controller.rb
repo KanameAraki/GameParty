@@ -1,18 +1,19 @@
 class Public::PostsController < ApplicationController
 
-  def index
+  def new
     @new_post = Post.new
-    @posts = Post.all
+    playing_games = current_member.playing_games
+    game_ids = playing_games.pluck(:game_id)
+    @games = Game.where(id: game_ids)
+  end
 
-
-    @playing_games = current_member.playing_games #メンバーが「プレイ中のゲーム」に追加したゲーム一覧を出したい
-    game_ids = @playing_games.pluck(:game_id)     #playing_gamesテーブルからgame_idを抜き取る
-    @games = Game.where(id: game_ids)            #game_idに該当するデータを配列で得る、.namesで名前が出ると思ったがでない
-    # @names = games.pluck(:name)                   #名前だけ抜き取るが、（おそらく）idがないことが原因でエラーが出る
-    #名前を配列で得ることはできたが、配列から名前を得ることができない？
-
+  def index
+  # 　左側本人情報
+    @member = current_member
+    # 右側フォローした人の投稿
+    members = @member.follower_user
+    @posts = Post.where(member_id = members.ids)
     # binding.pry
-
 
   end
 

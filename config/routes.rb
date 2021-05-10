@@ -25,7 +25,7 @@ Rails.application.routes.draw do
      get "/relationships/followings",to: "relationships#followings", as: :followings_index
      get "/relationships/followers",to: "relationships#followers", as: :followers_index
     end
-    resources :posts,only:[:index,:show,:create,:destroy] do
+    resources :posts,only:[:index,:show,:create,:destroy,:new] do
      patch "/close", to: "posts#close", as: :close
      resources :comments,only:[:create,:destroy]
      resource :favorites,only:[:create,:destroy]
