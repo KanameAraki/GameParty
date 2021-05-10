@@ -1,6 +1,17 @@
-<%= form_with model:@new_post, local: true do |f|%>
-<%= f.text_field :content%>
-<%= f.select :category, [["通常の投稿", "normal"],["募集投稿", "recruitment"]] %>
-<%= f.collection_select(:game_id, @games, :id, :name) %>
-<%= f.submit "投稿する"%>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="mx-auto mt-5">
+    <h4>新規投稿</h4>
+    <div class="border rounded-lg p-4">
+    <%= form_with model:@new_post, local: true do |f|%>
+    <%= f.label :category , "投稿カテゴリ：", class:"mb-4" %>
+    <%= f.select :category, [["通常の投稿", "normal"],["募集投稿", "recruitment"]] %><br>
+    <%= f.label :game_id, "ゲームを関連づける：", class:"mb-4"%>
+    <%= f.collection_select(:game_id, @games, :id, :name, prompt:"プレイ中のゲームから選択")%><br>
+    <%= f.text_area :content, size:"45x7"%><br>
+    <%= f.submit "投稿する", class:"btn btn-success mt-2"%>
+    <% end %>
+    </div>
+    </div>
+  </div>
+</div>

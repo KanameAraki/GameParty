@@ -12,7 +12,7 @@ class Public::PostsController < ApplicationController
     @member = current_member
     # 右側フォローした人の投稿
     members = @member.follower_user
-    @posts = Post.where(member_id = members.ids)
+    @posts = Post.where(member_id: members.ids) + current_member.posts
     # binding.pry
 
   end

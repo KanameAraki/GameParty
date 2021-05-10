@@ -60,6 +60,9 @@
                  <%= link_to "♡",post_favorites_path(post),method: :poste, class:"text-decoration-none"%>
                  <span><%= post.favorites.count %>いいね</span>
                 <% end %>
+                <% if post.comments.exists? %>
+                <span class="ml-4"><%= post.comments.count %> 件のコメント</span>
+                <% end %>
               </div>
               <div class="ml-auto py-1">
                 <% if post.game_id.present? %>
