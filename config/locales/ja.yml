@@ -5,3 +5,8 @@ ja:
         normal: "通常の投稿"
         recruitment: "募集"
         closed: "締め切りました"
+    contact:
+      subject:
+        other: "その他ご要望"
+        request: "ゲームの追加申請"
+        report: "メンバー通報"
