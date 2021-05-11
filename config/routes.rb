@@ -37,6 +37,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
    resources :games
+   resources :announcements,only:[:new,:create,:edit,:destroy,:show]
   end
 
 end

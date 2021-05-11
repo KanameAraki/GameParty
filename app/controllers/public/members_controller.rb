@@ -2,7 +2,8 @@ class Public::MembersController < ApplicationController
 
   def show
     @member = Member.find(params[:id])
-    @posts = @member.posts
+    @playing_games = @member.games.order(created_at: :DESC)
+    @posts = @member.posts.order(created_at: :DESC)
   end
 
   def edit

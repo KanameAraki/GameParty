@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+    <div class="mx-auto mt-5">
+      <div class="text-center">
+        <h3><%= @announcement.title %></h3>
+      </div>
+      <p class="mb-0 ml-3 mt-3">本文</p>
+      <div class="border p-3">
+        <%= safe_join(@body.split("\n"),tag(:br))%>
+      </div>
+      <div class="text-right">
+        <%= link_to "戻る",root_path%>
+      </div>
+    </div>
+  </div>
+</div>

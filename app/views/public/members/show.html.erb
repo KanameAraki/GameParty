@@ -20,7 +20,7 @@
 
       <div class="border my-3">
         <p>プレイ中のゲーム：<%= @member.games.count %>個</p>
-        <% @member.games.each do |game| %>
+        <% @playing_games.each do |game| %>
           <%= link_to game_path(game) do %>
             <p><%= attachment_image_tag game, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "20x20"%>　<%= game.name %></p>
           <% end %>
@@ -33,7 +33,7 @@
     <div class="col-8">
       <% @posts.each do |post| %>
           <div class="border rounded-lg mt-3">
-              
+
             <div class="d-flex mt-2 ml-2">
               <%= link_to member_path(post.member),class:"text-dark text-decoration-none" do%>
                <p class="text-decoration-none"><%= attachment_image_tag post.member, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "30x30",class:"rounded-circle border"%>
