@@ -1,1 +1,21 @@
-<h1>トップページです</h1>
+<div class="container">
+  <div class="row">
+    <div class="mx-auto">
+      <div class="mt-5">
+      <table class="teble table-bordered">
+        <tr class="bg-light">
+          <th>お知らせ一覧</th>
+          <th>お知らせ内容</th>
+        </tr>
+        <% @announcements.each do |announcement| %>
+          <tr>
+            <td class="text-truncate", style="max-width: 230px;"><%= link_to announcement.title,admin_announcement_path(announcement), class:"text-dark text-decoration-none" %></td>
+            <td class="text-truncate", style="max-width: 400px;"><%= link_to announcement.body,admin_announcement_path(announcement) %></td>
+          </tr>
+        <% end %>
+      </table>
+      </div>
+
+    </div>
+  </div>
+</div>

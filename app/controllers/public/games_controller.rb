@@ -12,9 +12,9 @@ class Public::GamesController < ApplicationController
   def show
     @game = Game.find(params[:id])
     if params[:search] == "1"
-    @posts = Post.where(game_id: @game.id, category: "recruitment")
+    @posts = Post.where(game_id: @game.id, category: "recruitment").order(created_at: :DESC)
     else
-    @posts = Post.where(game_id: @game.id)
+    @posts = Post.where(game_id: @game.id).order(created_at: :DESC)
     end
     # binding.pry
   end

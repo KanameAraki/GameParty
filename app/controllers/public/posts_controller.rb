@@ -10,11 +10,11 @@ class Public::PostsController < ApplicationController
   def index
   # 　左側本人情報
     @member = current_member
+    @playing_games = @member.games.order(created_at: :DESC)
     # 右側フォローした人の投稿
     members = @member.follower_user
-    @posts = Post.where(member_id: members.ids) + current_member.posts
     # binding.pry
-
+    @posts = Post.where(member_id: members.ids).or( Post.where(member_id: current_member.id)).order(created_at: :DESC)
   end
 
   def show
