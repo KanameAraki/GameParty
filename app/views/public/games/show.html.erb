@@ -8,6 +8,20 @@
     </div>
 
     <div class="col-8">
+      <div class="text-center bg-light mt-3 py-1">
+        <%= form_with url: game_path(@game), method: :get, local: true do |f| %>
+          <span><%= f.radio_button :search, 0 %>すべての投稿を表示</span>
+          <span class="mx-2"><%= f.radio_button :search, 1 %>募集投稿のみ表示</span>
+          <span><%= f.submit "検索", name: nil, class:"btn btn-primary py-1"%></span>
+        <% end %>
+      </div>
+
+      <% if params[:search] == "0"%>
+        <h5 class="text-center mt-2">すべての投稿を表示中です</h5>
+      <% elsif params[:search] == "1"%>
+        <h5 class="text-center mt-2">募集中のみ表示中です</h5>
+      <% end %>
+
       <% @posts.each do |post| %>
           <div class="border rounded-lg mt-3">
             <div class="d-flex mt-2 ml-2">

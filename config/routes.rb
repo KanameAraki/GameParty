@@ -31,6 +31,7 @@ Rails.application.routes.draw do
      resource :favorites,only:[:create,:destroy]
     end
     resources :games,only:[:index,:show]
+    get "/search", to: "games#search",as: :search
     resources :chats,only:[:show,:create]
   end
 

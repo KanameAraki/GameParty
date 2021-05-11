@@ -1,6 +1,10 @@
 <div class="container">
-  <div>
-    <p>ここでゲームを検索</p>
+  <div class="d-flex justify-content-center my-5">
+    <h3 class="mr-5">ゲーム一覧</h3>
+    <%= form_with url: games_path,method: :get, local: true do |f| %>
+      <%= f.text_field :search, value: params[:search] %>
+      <%= f.submit "検索", name: nil %>
+    <% end %>
   </div>
   <div class="row">
     <table class="table w-50 text-left mx-auto">
