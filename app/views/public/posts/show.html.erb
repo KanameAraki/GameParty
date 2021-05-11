@@ -8,7 +8,7 @@
         <% end %>
         <div class="ml-auto mr-2">
          <% if @post.member == current_member && @post.category == "recruitment"  %>
-          <%= link_to post.category_i18n, post_close_path(@post), method: :patch, class:"btn btn-success"%>
+          <%= link_to @post.category_i18n, post_close_path(@post), method: :patch, class:"btn btn-success"%>
          <% elsif @post.category == "closed" %>
           <p class="btn border"><%= @post.category_i18n %></p>
          <% end %>
