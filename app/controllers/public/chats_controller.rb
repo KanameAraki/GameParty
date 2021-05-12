@@ -20,7 +20,31 @@ class Public::ChatsController < ApplicationController
 
   def create
     @chat = current_member.chats.new(chat_params)
-    @chat.save
+
+
+    if @chat.save
+      @room = @chat.room
+      # binding.pry
+      @friend_entry = Entry.where(room_id: @room.id).where.not(member_id: current_member.id)
+      @theid = @friend_entry.find_by(room_id: @room.id)
+      notification = current_member.active_notifications.new(
+        room_id: @room.id,
+        chat_id: @chat.id,
+        visited_id: @theid.member_id,
+        visiter_id: current_member.id,
+        action: 'dm'
+        )
+
+      if notification.visiter_id == notification.visited_id
+          notification.checked = true
+      end
+
+      if notification.valid?
+        notification.save
+        redirect_back(fallback_location: root_path)
+      end
+    end
+
   end
 
   private

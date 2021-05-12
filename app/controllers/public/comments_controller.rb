@@ -5,8 +5,11 @@ class Public::CommentsController < ApplicationController
     comment = Comment.new(comment_params)
     comment.member_id = current_member.id
     comment.post_id = post.id
-    comment.save
-    redirect_back(fallback_location: root_path)
+    @comment_post = comment.post
+    if comment.save
+      @comment_post.create_notification_comment!(current_member, comment.id)
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   def destroy
