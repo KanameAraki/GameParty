@@ -1,82 +1,13 @@
 <div class="container">
-<div class="row">
-
-
-
-    <div class="col-4 mt-3 rounded-lg" style="background-color: #ecf2fd;">
-      <%= attachment_image_tag @member, :image, :fill, 40, 40, format: "jpeg", fallback: "game_icon.jpeg",size: "200x200",class:"rounded-circle border mt-3"%>
-      <h2 class="mt-4"><%= @member.name %></h2>
-      <p><%= @member.introduction %></p>
-      <p>フォロー: <%= link_to @member.follower.count, member_followers_index_path(@member) %>　|　フォロワー: <%= link_to @member.following.count, member_followings_index_path(@member)%></p>
-
-      <% if current_member == @member %>
-       <%= link_to "編集",edit_member_path(current_member), class:"btn btn-success"%>
-      <% elsif current_member.follower.exists?(following_id: @member) %>
-       <%= link_to "フォローを外す",member_relationships_path(@member),method: :delete,class:"btn btn-primary"%>
-      <% else %>
-       <%= link_to "フォローする",member_relationships_path(@member),method: :post,class:"btn btn-primary"%>
-      <% end %>
-      <% if current_member.follower.exists?(following_id: @member) && current_member.following.exists?(follower_id: @member)%>
-        <%= link_to "チャットをする", chat_path(@member),class:"btn btn-primary"%>
-      <% end %>
-
-      <div class="border my-3">
-        <p>プレイ中のゲーム：<%= @member.games.count %>個</p>
-        <% @playing_games.each do |game| %>
-          <%= link_to game_path(game) do %>
-            <p><%= attachment_image_tag game, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "20x20"%>　<%= game.name %></p>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-
-    <div class="col-8">
+  <div class="row">
+    <!--サイドバー（ログインメンバーの情報）-->
+    <%= render "public/members/sidebar",member: @member,playing_games: @playing_games%>
+    <!--ログインメンバーがフォローしている人の投稿-->
+    <div class="col-8 offset-4">
       <% unless current_member.follower_user.exists?%>
-       <p class="text-center mt-3">フォローした人の投稿一覧です！気になる人をフォローしてみましょう！</p>
+        <p class="text-center mt-3">フォローした人の投稿一覧です！気になる人をフォローしてみましょう！</p>
       <% end %>
-      <% @posts.each do |post| %>
-          <div class="border rounded-lg mt-3">
-            <div class="d-flex mt-2 ml-2">
-              <%= link_to member_path(post.member),class:"text-dark text-decoration-none" do%>
-               <p class="text-decoration-none"><%= attachment_image_tag post.member, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "30x30",class:"rounded-circle border"%>
-               <%= post.member.name %></p>
-              <% end %>
-              <div class="ml-auto mr-2">
-               <% if post.member == current_member && post.category == "recruitment"  %>
-                <%= link_to post.category_i18n, post_close_path(post), method: :patch, class:"btn btn-success"%>
-               <% elsif post.category == "closed" %>
-                <p class="btn border"><%= post.category_i18n %></p>
-               <% end %>
-              </div>
-            </div>
-<!--投稿文-->
-            <%= link_to post_path(post.id),class:"text-decoration-none" do%>
-                <p class="text-dark ml-4"><%= post.content %></p>
-            <% end %>
-<!--投稿下部-->
-            <div class="d-flex border-top">
-              <div class="ml-2 py-1">
-                <% if current_member.favorites.exists?(post_id: post.id) %>
-                 <%= link_to "❤️",post_favorites_path(post),method: :delete, class:"text-decoration-none"%>
-                 <span><%= post.favorites.count %>いいね</span>
-                <% else %>
-                 <%= link_to "♡",post_favorites_path(post),method: :poste, class:"text-decoration-none"%>
-                 <span><%= post.favorites.count %>いいね</span>
-                <% end %>
-                <% if post.comments.exists? %>
-                <span class="ml-4"><%= post.comments.count %> 件のコメント</span>
-                <% end %>
-              </div>
-              <div class="ml-auto py-1">
-                <% if post.game_id.present? %>
-                 <%= attachment_image_tag Game.find(post.game_id), :image, format: "jpeg", fallback: "game_icon.jpeg",size: "20x20",class:"mr-2"%>
-                 <%= link_to Game.find(post.game_id).name, game_path(post.game_id),class:"text-dark text-decoration-none mr-2"%>
-                <% end %>
-              </div>
-            </div>
-
-          </div>
-      <% end %>
+      <%= render "public/posts/post_index", posts: @posts%>
     </div>
-</div>
+  </div>
 </div>

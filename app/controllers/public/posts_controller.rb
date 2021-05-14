@@ -20,6 +20,9 @@ class Public::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @comments = @post.comments
+    @not_replies = @comments.where(reply: nil)
+    # binding.pry
+
     @new_comment = Comment.new
     @reply = Comment.new
   end
@@ -28,9 +31,6 @@ class Public::PostsController < ApplicationController
     new_post = Post.new(post_params)
     new_post.member_id = current_member.id
     new_post.save
-    # 通知を作成
-    @item = Post.find(params[:post_id])
-    @item.create_notification_by(current_member)
     redirect_to member_path(current_member)
   end
 

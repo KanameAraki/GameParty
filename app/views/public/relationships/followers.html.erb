@@ -1,4 +1,28 @@
-<h1>フォロー一覧</h1>
-<% @member.follower_user.each do |follower| %>
-<%= follower.name %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="mx-auto">
+      <h3 class="my-5"><%= @member.name %>さんのフォロー一覧</h3>
+      <table class="table">
+        <% @member.follower_user.each do |follower| %>
+          <tr>
+            <td>
+              <%= link_to member_path(follower) do %>
+                <%= attachment_image_tag follower, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "30x30",class:"rounded-circle border"%>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to follower.name, member_path(follower), class:"text-decoration-none text-dark"%>
+            </td>
+            <td>
+              <% if current_member.follower.exists?(following_id: follower) %>
+              <%= link_to "フォローを外す",member_relationships_path(follower),method: :delete,class:"btn btn-primary"%>
+              <% else %>
+              <%= link_to "フォローする",member_relationships_path(follower),method: :post,class:"btn btn-primary"%>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

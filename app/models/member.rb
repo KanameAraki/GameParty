@@ -1,6 +1,8 @@
 class Member < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  validates :introduction,    length: { maximum: 60 }
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -47,6 +49,14 @@ class Member < ApplicationRecord
         action: 'follow'
       )
       notification.save if notification.valid?
+    end
+  end
+
+  def self.search(search)
+    if search
+      where("name LIKE ?","%#{search}%")
+    else
+      all
     end
   end
 

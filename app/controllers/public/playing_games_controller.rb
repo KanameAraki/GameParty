@@ -1,6 +1,7 @@
 class Public::PlayingGamesController < ApplicationController
 
   def index
+    @member = Member.find(params[:member_id])
   end
 
   def create

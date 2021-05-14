@@ -1,12 +1,33 @@
-<h1>ゲーム一覧ページです</h1>
-<%= link_to "ゲームを追加する",new_admin_game_path %>
-<% @games.each do |game|%>
-<%= link_to admin_game_path(game) do %>
-<div class="border">
-  <%= attachment_image_tag game, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "30x30"%>
-  <p>名前：<%= game.name %></p>
-  <p>説明：<%= game.introduction %></p>
-  <%= link_to "編集する", edit_admin_game_path(game) %>
+
+<div class="container">
+  <div class="d-flex justify-content-center my-5">
+    <%= link_to "ゲームを追加",new_admin_game_path, class:"btn btn-success mr-5"%>
+    <h3 class="mr-5">ゲーム一覧</h3>
+    <%= form_with url: games_path,method: :get, local: true do |f| %>
+      <%= f.text_field :search, value: params[:search] %>
+      <%= f.submit "検索", name: nil %>
+    <% end %>
+  </div>
+  <div class="row">
+    <table class="table w-50 text-left mx-auto">
+      <tr class="thead-light">
+        <th>ゲーム名</th>
+        <th class="text-right">プレイ中</th>
+      </tr>
+      <% @games.each do |game|%>
+      <tr>
+        <td class="pt-3">
+          <%= link_to game_path(game),class:"text-decoration-none" do %>
+           <span class="text-decoration-none text-dark">
+             <%= attachment_image_tag game, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "30x30"%>　<%= game.name %>
+           </span>
+          <% end %>
+        </td>
+        <td class="text-right">
+　　　　　<%= link_to "編集する", edit_admin_game_path(game) %>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
 </div>
-<% end %>
-<% end %>

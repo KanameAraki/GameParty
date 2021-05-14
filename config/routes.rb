@@ -38,11 +38,13 @@ Rails.application.routes.draw do
     post "/contacts/back",to: "contacts#back", as: :back
     get "/done",to: "contacts#done", as: :done
     resources :notifications,only:[:index], as: :notifications
+    resources :announcements,only:[:index,:show]
   end
 
   namespace :admin do
    resources :games
-   resources :announcements,only:[:new,:create,:edit,:destroy,:show]
+   resources :announcements,only:[:new,:create,:edit,:destroy]
+   resources :members,only:[:index]
   end
 
 end
