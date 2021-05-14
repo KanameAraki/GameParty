@@ -6,6 +6,11 @@ class Public::CommentsController < ApplicationController
     comment.member_id = current_member.id
     comment.post_id = post.id
     @comment_post = comment.post
+
+    # 通知を作成
+    # comment.create_notification_comment!(current_member,)
+    # redirect_to member_path(current_member)
+
     if comment.save
       @comment_post.create_notification_comment!(current_member, comment.id)
       redirect_back(fallback_location: root_path)

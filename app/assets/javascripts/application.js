@@ -18,3 +18,12 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+
+
+// public/posts#show
+$(function(){
+  $('.comment-icon ').on('click', function(){
+    $(this).parent().find(".comment-form").toggleClass("d-none");
+  });
+});

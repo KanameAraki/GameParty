@@ -10,7 +10,7 @@
   </head>
 
   <body>
-    <header style="background-color: #e3f2fd;">
+    <header class="sticky-top" style="background-color: #e3f2fd;">
       <div class="container">
         <nav class="navbar navbar-light">
           <%= link_to "GameParty!!", root_path, class:"navbar-brand"%>
@@ -20,6 +20,9 @@
                 <%= link_to "ゲーム一覧", admin_games_path,class:"nav-link text-dark btn btn-light"%>
               </li>
               <li class="nav-item mr-2">
+                <%= link_to "メンバー一覧", admin_members_path,class:"nav-link text-dark btn btn-light"%>
+              </li>
+              <li class="nav-item mr-2">
                 <%= link_to "ログアウト", destroy_admin_session_path, method: :delete,class:"nav-link text-dark btn btn-light"%>
               </li>
               <li class="nav-item mr-2">
@@ -27,35 +30,52 @@
               </li>
             <% elsif member_signed_in? %>
               <li class="nav-item mr-2">
-                <%= link_to "通知", notifications_path,class:"nav-link text-dark btn btn-light"%>
+                <%= link_to new_contact_path,class:"nav-link text-dark btn btn-light" do %>
+                <i class="fas fa-envelope"></i>
+                <% end %>
               </li>
               <li class="nav-item mr-2">
-                <%= link_to "お問い合わせ", new_contact_path,class:"nav-link text-dark btn btn-light"%>
+                <%= link_to new_post_path,class:"nav-link text-dark btn btn-light" do%>
+                <i class="fas fa-plus"></i>
+                <% end %>
               </li>
               <li class="nav-item mr-2">
-                <%= link_to "新規投稿", new_post_path,class:"nav-link text-dark btn btn-light"%>
+                <%= link_to posts_path,class:"nav-link text-dark btn btn-light" do %>
+                <i class="fas fa-users"></i>
+                <% end %>
               </li>
               <li class="nav-item mr-2">
-                <%= link_to "ログアウト", destroy_member_session_path, method: :delete,class:"nav-link text-dark btn btn-light"%>
+                <%= link_to games_path,class:"nav-link text-dark btn btn-light" do %>
+                <i class="fas fa-gamepad"></i>
+                <% end %>
               </li>
               <li class="nav-item mr-2">
-                <%= link_to "マイページ", member_path(current_member),class:"nav-link text-dark btn btn-light" %>
+                <%= link_to notifications_path,class:"nav-link text-dark btn btn-light" do%>
+                <i class="fas fa-bell"></i>
+                <% end %>
               </li>
               <li class="nav-item mr-2">
-                <%= link_to "投稿一覧", posts_path,class:"nav-link text-dark btn btn-light" %>
+                <%= link_to member_path(current_member),class:"nav-link btn btn-light",style:"height: 42px;" do%>
+                <%= attachment_image_tag current_member, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "30x30",class:"rounded-circle border"%>
+                <% end %>
               </li>
               <li class="nav-item mr-2">
-                <%= link_to "ゲーム一覧", games_path,class:"nav-link text-dark btn btn-light" %>
+                <%= link_to destroy_member_session_path, method: :delete,class:"nav-link text-dark btn btn-light" do %>
+                <i class="fas fa-sign-out-alt"></i>
+                <% end %>
               </li>
             <% else %>
               <li class="nav-item mr-2">
-                <%= link_to "アバウト", about_path,class:"nav-link text-dark btn btn-light" %>
+                <%= link_to "アバウト",about_path,class:"nav-link text-dark btn btn-light"%>
               </li>
               <li class="nav-item mr-2">
                 <%= link_to "新規登録", new_member_registration_path,class:"nav-link text-dark btn btn-light" %>
               </li>
               <li class="nav-item mr-2">
                 <%= link_to "ログイン", new_member_session_path,class:"nav-link text-dark btn btn-light" %>
+              </li>
+              <li class="nav-item mr-2">
+              <%= link_to "お問い合わせ",new_contact_path,class:"nav-link text-dark btn btn-light"%>
               </li>
             <% end %>
           </ul>
