@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="mx-auto w-50">
+      <h4 class="text-center my-4">お問い合わせ作成</h4>
+      <%= form_with model: @contact, url: confirm_path, local: true do |f| %>
+        <%= render "public/shared/error_messages", resource: f.object %>
+        <span class="form-group">
+          <%= f.label :name, 'お名前' %>
+          <%= f.text_field :name, autofocus: true, class: 'form-control' %>
+        </span>
+
+        <div class="form-group">
+          <%= f.label :email, 'メールアドレス' %>
+          <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :subject, 'お問い合わせ概要' %>
+          <%= f.select :subject, [["その他ご要望", "other"],["ゲームの追加申請", "request"],["メンバー通報","report"]] %><br>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :body, 'お問い合わせ内容' %>
+          <%= f.text_area :body, size: '10x10', class: 'form-control' %>
+        </div>
+
+        <div class="text-right">
+          <%= f.submit '入力内容確認', class:"btn btn-primary"%>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+

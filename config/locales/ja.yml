@@ -1,0 +1,41 @@
+ja:
+  enums:
+    post:
+      category:
+        normal: "通常の投稿"
+        recruitment: "募集"
+        closed: "締め切りました"
+    contact:
+      subject:
+        other: "その他ご要望"
+        request: "ゲームの追加申請"
+        report: "メンバー通報"
+  activerecord:
+    models:
+      member: メンバー
+    attributes:
+      member:
+        name: ニックネーム
+        email: メールアドレス
+        password: パスワード
+        introduction: 自己紹介文
+      post:
+        content: 投稿
+      comment:
+        content: コメント
+      contact:
+        name: 名前
+        email: メールアドレス
+        body: お問い合わせ内容
+      announcement:
+        title: タイトル
+        body: 本文
+      game:
+        name: ゲーム名
+        introduction: ゲーム説明文
+  devise:
+    failure:
+      member:
+        invalid: 入力内容に誤りがあります
+      admin:
+        invalid: 入力内容に誤りがあります

@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="mx-auto">
+    <%= form_with model:@member,local:true do |f| %>
+    <%= render "public/shared/error_messages", resource: f.object %>
+    <h3 class="my-5">メンバー情報編集ページ</h3>
+    <div class="field form-group">
+      <%= f.label :image ,"プロフィール画像："%>
+      <%= f.attachment_field :image, class:""%>
+    </div>
+    <div class="field form-group">
+      <%= f.label :name ,"ニックネーム"%>
+      <%= f.text_field :name, class:"form-control" %>
+    </div>
+    <div class="field form-group">
+      <%= f.label :introduction, "自己紹介文"%>
+      <%= f.text_area :introduction,size:"20x7", class:"form-control" %>
+    </div>
+    <div class="field form-group text-right">
+      <%= f.submit "変更を保存する" , class:"btn btn-success"%>
+    </div>
+    <% end %>
+    </div>
+  </div>
+</div>

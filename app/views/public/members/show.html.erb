@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row">
+    <!--ユーザー情報-->
+    <div>
+    <%= render "public/members/sidebar",member: @member,playing_games: @playing_games%>
+    </div>
+    <!--ユーザーの投稿-->
+    <div class="col-8 offset-4">
+      <%= render "public/posts/post_index", posts: @posts%>
+    </div>
+  </div>
+</div>

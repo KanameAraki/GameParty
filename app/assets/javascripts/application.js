@@ -10,7 +10,22 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery3
+//= require popper
+//= require bootstrap-sprockets
+
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+//= require data-confirm-modal
+
+
+
+// public/posts#show
+// $(function(){
+$(document).on('turbolinks:load', function() {
+  $('.comment-icon ').on('click', function(){
+    $(this).parent().find(".comment-form").toggleClass("d-none");
+  });
+});

@@ -1,0 +1,8 @@
+<h1>ゲーム詳細ページです</h1>
+<div class="">
+  <%= attachment_image_tag @game, :image, :fill, 40, 40, format: "jpg", fallback: "game_icon.jpg",size: "200x200"%>
+  <p>名前：<%= @game.name %></p>
+  <p>紹介文：<%= @game.introduction %></p>
+  <%= link_to "編集",edit_admin_game_path(@game) %>
+  <%= link_to "削除", admin_game_path(@game), method: :delete%>
+</div>

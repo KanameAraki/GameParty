@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="row">
+    <div class="border rounded-lg mt-3 w-75 mx-auto">
+      <div class="d-flex mt-2 ml-2">
+        <%= link_to member_path(@post.member),class:"text-dark text-decoration-none" do%>
+         <p class="text-decoration-none"><%= attachment_image_tag @post.member, :image, format: "jpg", fallback: "game_icon.jpg",size: "30x30",class:"rounded-circle border"%>
+         <%= @post.member.name %></p>
+        <% end %>
+        <div class="ml-auto mr-2">
+         <% if @post.member == current_member && @post.category == "recruitment"  %>
+          <%= link_to @post.category_i18n, post_close_path(@post), method: :patch, class:"btn btn-success"%>
+         <% elsif @post.category == "closed" %>
+          <p class="btn border"><%= @post.category_i18n %></p>
+         <% end %>
+        </div>
+      </div>
+      <p class="text-dark ml-4"><%= @post.content %></p>
+      <div class="d-flex border-top">
+        <div class="ml-2 py-1">
+
+       <span id="favorite-btn-<%= @post.id %>">
+       <%= render 'public/favorites/favorite', post: @post %>
+       </span>
+
+
+          <% if @post.member == current_member %>
+          <%= link_to "投稿を削除", post_path(@post),method: :delete, class:"ml-4 text-dark"%>
+          <% end %>
+        </div>
+        <div class="ml-auto py-1">
+          <% if @post.game_id.present? %>
+           <%= attachment_image_tag Game.find(@post.game_id), :image, format: "jpg", fallback: "game_icon.jpg",size: "20x20",class:"mr-2"%>
+           <%= link_to Game.find(@post.game_id).name, game_path(@post.game_id),class:"text-dark text-decoration-none mr-2"%>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex mx-auto w-75 mt-3">
+    <h5 class="mr-3 pt-1">コメント一覧</h5>
+    <% if @empty_comment%>
+    <span class="mr-3"><%= render "public/shared/error_messages", resource: @empty_comment %></span>
+    <% end %>
+    <div>
+      <%#= form_with url: post_comments_path(@post,@new_comment), local:true do |f|%>
+      <%= form_with model: [@post,@new_comment], local:true do |f|%>
+      <%= f.text_field :content %>
+
+      <%= f.submit "コメントする", class:"ml-2"%>
+      <% end %>
+    </div>
+    </div>
+    <% @not_replies.each do |comment|%>
+    <div class="border rounded-lg mt-3 w-75 mx-auto pt-2 pl-2">
+      <%= link_to member_path(comment.member),class:"text-dark text-decoration-none" do%>
+        <span class="text-decoration-none">
+          <%= attachment_image_tag comment.member, :image, format: "jpg", fallback: "game_icon.jpg",size: "30x30",class:"rounded-circle border"%>
+          <%= comment.member.name %>：
+        </span>
+      <% end %>
+      <span><%= comment.content %></span>
+        <!--コメントに返信フォーム-->
+        <div class="d-flex mt-2">
+          <i class="comment-icon far fa-comment-dots mx-1 my-3">
+          </i>
+          <span class="d-none comment-form mt-2">
+            <%= form_with model: [@post,@reply], local:true do |f|%>
+              <%= f.text_field :content ,class:"mb-2"%>
+              <%= f.hidden_field :post_id, value: @post.id %>
+              <%= f.hidden_field :reply, value: comment.id %>
+              <%= f.submit "コメントに返信する"%>
+            <% end %>
+          </span>
+        </div>
+        <!--コメントに対する返信を表示-->
+        <% if comment.reply != nil? %>
+          <% comment.replies.each do |reply| %>
+          <p class="border-top pt-3 pl-3">
+            <%= attachment_image_tag reply.member, :image, format: "jpg", fallback: "game_icon.jpg",size: "30x30",class:"rounded-circle border"%>
+            <%= reply.member.name %>：
+            <%= reply.content %>
+          </p>
+          <% end %>
+        <% end %>
+    </div>
+    <% end %>
+  </div>
+</div>

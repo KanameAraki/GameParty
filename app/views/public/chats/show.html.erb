@@ -1,0 +1,21 @@
+<div class="container">
+ <div class="row">
+  <div class="w-75 mx-auto">
+  <h4 class="my-4"><%= @member.name %>さんとのチャットルーム</h4>
+  <% @chats.each do |chat| %>
+   <% if chat.member_id == current_member.id %>
+    <p class="text-right"><%= chat.message %><%= attachment_image_tag current_member, :image, format: "jpg", fallback: "game_icon.jpg",size: "30x30",class:"rounded-circle border"%></p><br>
+   <% else %>
+    <p class="text-left"><%= attachment_image_tag chat.member, :image, format: "jpg", fallback: "game_icon.jpg",size: "30x30",class:"rounded-circle border"%><%= chat.message %></p><br>
+   <% end %>
+  <% end %>
+  </div>
+ </div>
+</div>
+<div class="mx-auto text-center">
+  <%= form_with model:@chat do |f|%>
+  <%= f.text_field :message, size:"50"%>
+  <%= f.hidden_field :room_id %>
+  <%= f.submit "送信", class:"btn btn-success"%>
+  <% end %>
+</div>

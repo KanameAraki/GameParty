@@ -1,0 +1,38 @@
+<div class="position-fixed col-3 mt-3 rounded-lg" style="background-color: #ecf2fd;">
+  <%= attachment_image_tag member, :image, :fill, 40, 40, format: "jpg", fallback: "game_icon.jpg",size: "200x200",class:"rounded-circle border mt-3"%>
+  <h2 class="mt-4"><%= member.name %></h2>
+  <p><%= member.introduction %></p>
+  <p>フォロー: <%= link_to member.follower.count, member_followers_index_path(member) %>　|　フォロワー: <%= link_to member.following.count, member_followings_index_path(member)%></p>
+  <% if admin_signed_in? %>
+    <%if member.is_deleted? %>
+      <%= link_to "凍結を解除", admin_member_close_path(member), method: :patch, class:"btn btn-primary",data: {confirm:"メンバーの凍結を解除しますか？",cancel:"やめる",commit:"解除する"},title:"確認"%>
+    <% else%>
+      <%= link_to "凍結させる", admin_member_close_path(member), method: :patch, class:"btn btn-danger",data: {confirm:"メンバーを凍結させますか？",cancel:"やめる",commit:"凍結させる"},title:"確認"%>
+    <% end %>
+  <%end%>
+
+  <% if member_signed_in? %>
+    <% if current_member == member %>
+      <%= link_to "編集",admin_member_close_path(current_member), class:"btn btn-success"%>
+    <% elsif current_member.follower.exists?(following_id: member) %>
+      <%= link_to "フォローを外す",member_relationships_path(member),method: :delete,class:"btn btn-primary"%>
+    <% else %>
+      <%= link_to "フォローする",member_relationships_path(member),method: :post,class:"btn btn-primary"%>
+    <% end %>
+    <% if current_member.follower.exists?(following_id: member) && current_member.following.exists?(follower_id: member)%>
+      <%= link_to "チャットをする", chat_path(member),class:"btn btn-primary"%>
+    <% end %>
+  <% end %>
+
+  <div class="border my-3">
+    <span class="pt-2 pl-2 pb-1">プレイ中のゲーム：<%= member.games.count %>個</span>
+    <% playing_games.limit(3).each do |game| %>
+      <%= link_to game_path(game),class:"text-decoration-none text-dark" do %>
+        <p class="pl-1 pt-1"><%= attachment_image_tag game, :image, format: "jpg", fallback: "game_icon.jpg",size: "20x20"%>　<%= game.name %></p>
+      <% end %>
+    <% end %>
+    <% if playing_games.count > 4 %>
+      <%= link_to "すべて見る>>>",member_playing_games_index_path(member), class:"float-right"%>
+    <% end %>
+  </div>
+</div>

@@ -1,24 +1,38 @@
-# README
+# Your Game Party(仮)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+プロフィールにプレイ中のゲームを設定することで趣味の合うユーザーを探したり、投稿にそのゲームを紐付けたりできるようになる。また、特定のゲームに関連づけられた投稿一覧、フレンドの投稿一覧、ハッシュタグごとの投稿一覧によって求めている情報をスムーズに閲覧できる。ハッシュタグで募集をかけたり投稿にコメントすることで他のユーザーとコミュニケーションをとることができ、フレンドになることでチャットが解放され、その後のコミュニケーションがより円滑にできる。
 
-Things you may want to cover:
+### サイトテーマ
+ゲームによるコミュニケーションをより円滑に、継続的にするゲーム特化型SNS
 
-* Ruby version
+### テーマを選んだ理由
+現在、インターネット上で一緒にゲームをプレイするフレンドは、Twitterやゲームの攻略サイトを通して探されている。それらを一元化し、さらに継続的に交友関係を続けることでより快適なゲームライフを遅れると考えたため。
 
-* System dependencies
+### ターゲットユーザ
+* ゲームを一緒にプレイできる人を探している人
+* ゲームを通じて人とコミュニケーションを取りたい人
+* ゲームに関する情報共有・情報発信がしたい人
 
-* Configuration
+### 主な利用シーン
+＊ ゲームの攻略情報が欲しい時、特定のゲームに関連づけられた投稿を一覧で見ることができる
+* 一緒にゲームをするフレンドが欲しい時、タグ付きの投稿で募集したり、そのゲームをプレイしている人を一覧で見ることができる。
+* その時一回限りのフレンドではなく、長く一緒に遊ぶフレンドが欲しい時、サイト内でフレンドになることで投稿をチェックしたりチャットを解放することができる。
 
-* Database creation
+## 機能一覧
+https://docs.google.com/spreadsheets/d/1ZMS-o48zsNk_0ftGEyhoGgjBJgek_x4vLA-Bm_NkcT4/edit?usp=sharing
 
-* Database initialization
+## 詳細設定書
+*　ER図(https://drive.google.com/file/d/1XgRiggGB4iZkIxosswZ3Esy_LYiQ28xi/view?usp=sharing)
+*　テーブル定義書(https://www.icloud.com/numbers/0WqNIUhZtHy_CmYenBPlNRb2Q)
+*　アプリケーション詳細設定書(https://www.icloud.com/numbers/0cyoujVyS63DjQSQYmiGfrV_A)
 
-* How to run the test suite
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 使用素材
+ゲームのパッケージについて、営利目的ではないにしろ著作物であることから、ゲームメーカーに許諾を得ることを含め検討中
