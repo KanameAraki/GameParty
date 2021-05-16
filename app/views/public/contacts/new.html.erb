@@ -3,6 +3,7 @@
     <div class="mx-auto w-50">
       <h4 class="text-center my-4">お問い合わせ作成</h4>
       <%= form_with model: @contact, url: confirm_path, local: true do |f| %>
+        <%= render "public/shared/error_messages", resource: f.object %>
         <span class="form-group">
           <%= f.label :name, 'お名前' %>
           <%= f.text_field :name, autofocus: true, class: 'form-control' %>

@@ -1,5 +1,8 @@
 class Public::ChatsController < ApplicationController
 
+    before_action :authenticate_member!
+  skip_before_action :authenticate_member!,if: :admin_signed_in?
+
   def show
     @member = Member.find(params[:id])
     rooms = current_member.entries.pluck(:room_id)

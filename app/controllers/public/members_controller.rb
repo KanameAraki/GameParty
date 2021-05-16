@@ -1,5 +1,8 @@
 class Public::MembersController < ApplicationController
 
+  before_action :authenticate_member!
+  skip_before_action :authenticate_member!,if: :admin_signed_in?
+
   def show
     @member = Member.find(params[:id])
     @playing_games = @member.games.order(created_at: :DESC)
@@ -7,14 +10,19 @@ class Public::MembersController < ApplicationController
   end
 
   def edit
-    # @member = Member.find(params[:id])
+    @member = Member.find(params[:id])
   end
 
   def update
     member = Member.find(params[:id])
-    member.update(member_params)
-    redirect_to member_path(current_member)
+    if member.update(member_params)
+      redirect_to member_path(current_member)
+    else
+      @member = member
+      render "edit"
+    end
   end
+
 
 private
 

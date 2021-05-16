@@ -74,3 +74,5 @@ gem 'enum_help'
 
 gem 'pry-byebug'
 gem "dotenv-rails"
+
+gem "data-confirm-modal"

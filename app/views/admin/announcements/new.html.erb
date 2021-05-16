@@ -3,6 +3,7 @@
     <div class="mx-auto w-50">
         <h4 class="my-5 bg-light">お知らせの新規作成</h4>
       <%= form_with model: [:admin,@announcement], local: true do |f|%>
+        <%= render "public/shared/error_messages", resource: f.object %>
         <div class="form-group">
           <%= f.label :title,"タイトル" %>
           <%= f.text_field :title, class:"form-control" %>

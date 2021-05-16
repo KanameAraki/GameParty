@@ -1,5 +1,7 @@
 class Comment < ApplicationRecord
 
+  validates :content, presence: true,length: {maximum:100}
+
   belongs_to :member
   belongs_to :post
 
@@ -7,7 +9,7 @@ class Comment < ApplicationRecord
   has_many :replies, class_name: "Comment", foreign_key: :reply, dependent: :destroy
 
   has_many :notifications, dependent: :destroy
-  
+
   def create_notification_comment!(current_member, comment_id)
    # 自分以外にコメントしている人をすべて取得し、全員に通知を送る
    temp_ids = Comment.select(:member_id).where(post_id: id).where.not(member_id: current_member.id).distinct
@@ -17,7 +19,7 @@ class Comment < ApplicationRecord
    # binding.pry
    # まだ誰もコメントしていない場合は、投稿者に通知を送る
    save_notification_comment!(current_member, comment_id, member_id) if temp_ids.blank?
- end
+  end
 
  def save_notification_comment!(current_member, comment_id, visited_id)
     # コメントは複数回することが考えられるため、１つの投稿に複数回通知する

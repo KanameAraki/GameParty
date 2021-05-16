@@ -1,9 +1,6 @@
 class Admin::AnnouncementsController < ApplicationController
-
-  def show
-    @announcement = Announcement.find(params[:id])
-    @body = @announcement.body
-  end
+  
+  before_action :authenticate_admin!
 
   def new
     @announcement = Announcement.new
@@ -11,8 +8,12 @@ class Admin::AnnouncementsController < ApplicationController
 
   def create
     announcement = Announcement.new(announcement_params)
-    announcement.save
-    redirect_to root_path
+    if announcement.save
+      redirect_to root_path
+    else
+      @announcement = announcement
+      render "new"
+    end
   end
 
   private

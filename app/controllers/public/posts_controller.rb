@@ -1,5 +1,8 @@
 class Public::PostsController < ApplicationController
 
+  before_action :authenticate_member!
+  skip_before_action :authenticate_member!,if: :admin_signed_in?
+
   def new
     @new_post = Post.new
     playing_games = current_member.playing_games
@@ -22,7 +25,6 @@ class Public::PostsController < ApplicationController
     @comments = @post.comments
     @not_replies = @comments.where(reply: nil)
     # binding.pry
-
     @new_comment = Comment.new
     @reply = Comment.new
   end
@@ -30,8 +32,15 @@ class Public::PostsController < ApplicationController
   def create
     new_post = Post.new(post_params)
     new_post.member_id = current_member.id
-    new_post.save
-    redirect_to member_path(current_member)
+    if new_post.save
+      redirect_to member_path(current_member)
+    else
+       @new_post = new_post
+       playing_games = current_member.playing_games
+        game_ids = playing_games.pluck(:game_id)
+        @games = Game.where(id: game_ids)
+      render "new"
+    end
   end
 
   def destroy

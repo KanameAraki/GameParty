@@ -1,5 +1,7 @@
 class Post < ApplicationRecord
 
+ validates :content, presence: true, length: {maximum:150}
+
   belongs_to :member
   belongs_to :game, optional: true
 

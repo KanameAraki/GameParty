@@ -1,4 +1,7 @@
 class Admin::GamesController < ApplicationController
+
+  before_action :authenticate_admin!
+
   def index
     @games = Game.all
   end
@@ -13,8 +16,12 @@ class Admin::GamesController < ApplicationController
 
   def create
     game = Game.new(game_params)
-    game.save
-    redirect_to admin_games_path
+    if game.save
+      redirect_to admin_games_path
+    else
+      @game = game
+      render "new"
+    end
   end
 
   def edit

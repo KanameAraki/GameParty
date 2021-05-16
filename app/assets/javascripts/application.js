@@ -18,11 +18,13 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+//= require data-confirm-modal
 
 
 
 // public/posts#show
-$(function(){
+// $(function(){
+$(document).on('turbolinks:load', function() {
   $('.comment-icon ').on('click', function(){
     $(this).parent().find(".comment-form").toggleClass("d-none");
   });

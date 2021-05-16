@@ -4,6 +4,7 @@
     <h4>新規投稿</h4>
     <div class="border rounded-lg p-4">
     <%= form_with model:@new_post, local: true do |f|%>
+    <%= render "public/shared/error_messages", resource: f.object %>
     <%= f.label :category , "投稿カテゴリ：", class:"mb-4" %>
     <%= f.select :category, [["通常の投稿", "normal"],["募集投稿", "recruitment"]] %><br>
     <%= f.label :game_id, "ゲームを関連づける：", class:"mb-4"%>
