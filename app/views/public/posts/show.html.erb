@@ -3,7 +3,7 @@
     <div class="border rounded-lg mt-3 w-75 mx-auto">
       <div class="d-flex mt-2 ml-2">
         <%= link_to member_path(@post.member),class:"text-dark text-decoration-none" do%>
-         <p class="text-decoration-none"><%= attachment_image_tag @post.member, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "30x30",class:"rounded-circle border"%>
+         <p class="text-decoration-none"><%= attachment_image_tag @post.member, :image, format: "jpg", fallback: "game_icon.jpg",size: "30x30",class:"rounded-circle border"%>
          <%= @post.member.name %></p>
         <% end %>
         <div class="ml-auto mr-2">
@@ -29,7 +29,7 @@
         </div>
         <div class="ml-auto py-1">
           <% if @post.game_id.present? %>
-           <%= attachment_image_tag Game.find(@post.game_id), :image, format: "jpeg", fallback: "game_icon.jpeg",size: "20x20",class:"mr-2"%>
+           <%= attachment_image_tag Game.find(@post.game_id), :image, format: "jpg", fallback: "game_icon.jpg",size: "20x20",class:"mr-2"%>
            <%= link_to Game.find(@post.game_id).name, game_path(@post.game_id),class:"text-dark text-decoration-none mr-2"%>
           <% end %>
         </div>
@@ -53,7 +53,7 @@
     <div class="border rounded-lg mt-3 w-75 mx-auto pt-2 pl-2">
       <%= link_to member_path(comment.member),class:"text-dark text-decoration-none" do%>
         <span class="text-decoration-none">
-          <%= attachment_image_tag comment.member, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "30x30",class:"rounded-circle border"%>
+          <%= attachment_image_tag comment.member, :image, format: "jpg", fallback: "game_icon.jpg",size: "30x30",class:"rounded-circle border"%>
           <%= comment.member.name %>：
         </span>
       <% end %>
@@ -75,7 +75,7 @@
         <% if comment.reply != nil? %>
           <% comment.replies.each do |reply| %>
           <p class="border-top pt-3 pl-3">
-            <%= attachment_image_tag reply.member, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "30x30",class:"rounded-circle border"%>
+            <%= attachment_image_tag reply.member, :image, format: "jpg", fallback: "game_icon.jpg",size: "30x30",class:"rounded-circle border"%>
             <%= reply.member.name %>：
             <%= reply.content %>
           </p>

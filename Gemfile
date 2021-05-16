@@ -76,3 +76,7 @@ gem 'pry-byebug'
 gem "dotenv-rails"
 
 gem "data-confirm-modal"
+
+group :production do
+  gem 'mysql2'
+end

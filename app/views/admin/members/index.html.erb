@@ -18,7 +18,7 @@
       <tr>
         <td class="pt-3">
           <%= link_to member_path(member),class:"text-decoration-none" do %>
-             <%= attachment_image_tag member, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "30x30"%>
+             <%= attachment_image_tag member, :image, format: "jpg", fallback: "game_icon.jpg",size: "30x30"%>
           <% end %>
         </td>
         <td><%= link_to member.name,member_path(member),class:"text-dark text-decoration-none"%></td>
