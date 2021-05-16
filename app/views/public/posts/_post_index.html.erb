@@ -8,7 +8,9 @@
       <% end %>
       <div class="ml-auto mr-2">
         <% if post.member == current_member && post.category == "recruitment"  %>
-          <%= link_to post.category_i18n, post_close_path(post), method: :patch, class:"btn btn-success"%>
+          <%= link_to post.category_i18n, post_close_path(post), method: :patch, class:"btn btn-success",data: {confirm:"募集を締め切りますか？",cancel:"やめる",commit:"締め切る"},title:"確認"%>
+        <% elsif post.category == "recruitment" %>
+          <p class="btn btn-success"><%= post.category_i18n%></p>
         <% elsif post.category == "closed" %>
           <p class="btn border"><%= post.category_i18n %></p>
         <% end %>
@@ -21,9 +23,11 @@
     <!--投稿下部-->
     <div class="d-flex border-top">
       <div class="ml-2 py-1">
+        <% if member_signed_in? %>
         <span id="favorite-btn-<%= post.id%>">
           <%= render 'public/favorites/favorite', post: post %>
         </span>
+        <% end %>
         <% if post.comments.exists? %>
           <span class="ml-4"><%= post.comments.count %> 件のコメント</span>
         <% end %>

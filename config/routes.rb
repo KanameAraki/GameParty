@@ -44,7 +44,9 @@ Rails.application.routes.draw do
   namespace :admin do
    resources :games
    resources :announcements,only:[:new,:create,:edit,:destroy]
-   resources :members,only:[:index]
+   resources :members,only:[:index] do
+     patch "/close", to: "members#close"
+   end
   end
 
 end

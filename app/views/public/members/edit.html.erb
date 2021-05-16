@@ -1,7 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="mx-auto">
-    <%= form_with model:current_member,local:true do |f| %>
+    <%= form_with model:@member,local:true do |f| %>
+    <%= render "public/shared/error_messages", resource: f.object %>
     <h3 class="my-5">メンバー情報編集ページ</h3>
     <div class="field form-group">
       <%= f.label :image ,"プロフィール画像："%>

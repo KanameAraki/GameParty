@@ -1,5 +1,8 @@
 class Public::GamesController < ApplicationController
 
+    before_action :authenticate_member!
+  skip_before_action :authenticate_member!,if: :admin_signed_in?
+
   def index
     if params[:search]
       @games = Game.search(params[:search])
@@ -18,4 +21,5 @@ class Public::GamesController < ApplicationController
     end
     # binding.pry
   end
+
 end

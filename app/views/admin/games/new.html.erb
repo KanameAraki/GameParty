@@ -3,6 +3,7 @@
     <div class="mx-auto">
       <h3 class="my-5">新規ゲーム登録ページです</h3>
       <%= form_with model: [:admin,@game], local: true do |f|%>
+      <%= render "public/shared/error_messages", resource: @game %>
       <div class="field form-group">
       <%= f.label :image ,"画像を設定："%>
       <%= f.attachment_field :image %>

@@ -1,19 +1,32 @@
 class Public::CommentsController < ApplicationController
 
+    before_action :authenticate_member!
+  skip_before_action :authenticate_member!,if: :admin_signed_in?
+
   def create
     post = Post.find(params[:post_id])
     comment = Comment.new(comment_params)
     comment.member_id = current_member.id
     comment.post_id = post.id
-    @comment_post = comment.post
-
-    # 通知を作成
-    # comment.create_notification_comment!(current_member,)
-    # redirect_to member_path(current_member)
-
+    # binding.pry
     if comment.save
-      @comment_post.create_notification_comment!(current_member, comment.id)
-      redirect_back(fallback_location: root_path)
+      post.create_notification_comment!(current_member, comment.id)
+      @post = post
+      @comments = @post.comments
+      @not_replies = @comments.where(reply: nil)
+      @empty_comment = comment
+      @new_comment = Comment.new
+      @reply = Comment.new
+      render "public/posts/show"
+    else
+      @post = post
+      @comments = @post.comments
+      @not_replies = @comments.where(reply: nil)
+      @empty_comment = comment
+      @new_comment = Comment.new
+      @reply = Comment.new
+      # binding.pry
+      render "public/posts/show"
     end
   end
 

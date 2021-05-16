@@ -1,14 +1,14 @@
 <div class="container">
   <div class="row">
 
-    <div class="col-4 mt-3 rounded-lg" style="background-color: #ecf2fd;">
+    <div class="position-fixed col-3 mt-3 rounded-lg" style="background-color: #ecf2fd;">
       <%= attachment_image_tag @game, :image, :fill, 40, 40, format: "jpeg", fallback: "game_icon.jpeg",size: "200x200",class:"rounded-circle border mt-3"%>
       <h2 class="mt-4"><%= @game.name %></h2>
       <p><%= @game.introduction %></p>
       <p><%= @game.members.count%>人がプレイ中</p>
     </div>
 
-    <div class="col-8">
+    <div class="col-8 offset-4">
       <div class="text-center bg-light mt-3 py-1">
         <%= form_with url: game_path(@game), method: :get, local: true do |f| %>
           <span><%= f.radio_button :search, 0 %>すべての投稿を表示</span>

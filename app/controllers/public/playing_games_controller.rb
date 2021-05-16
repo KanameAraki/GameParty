@@ -1,4 +1,7 @@
 class Public::PlayingGamesController < ApplicationController
+  
+    before_action :authenticate_member!
+  skip_before_action :authenticate_member!,if: :admin_signed_in?
 
   def index
     @member = Member.find(params[:member_id])

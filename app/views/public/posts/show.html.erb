@@ -37,9 +37,14 @@
     </div>
     <div class="d-flex mx-auto w-75 mt-3">
     <h5 class="mr-3 pt-1">コメント一覧</h5>
+    <% if @empty_comment%>
+    <span class="mr-3"><%= render "public/shared/error_messages", resource: @empty_comment %></span>
+    <% end %>
     <div>
-      <%= form_with model: [@post,@new_comment],local:true do |f|%>
+      <%#= form_with url: post_comments_path(@post,@new_comment), local:true do |f|%>
+      <%= form_with model: [@post,@new_comment], local:true do |f|%>
       <%= f.text_field :content %>
+
       <%= f.submit "コメントする", class:"ml-2"%>
       <% end %>
     </div>
