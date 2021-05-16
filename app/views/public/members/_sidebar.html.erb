@@ -1,5 +1,5 @@
 <div class="position-fixed col-3 mt-3 rounded-lg" style="background-color: #ecf2fd;">
-  <%= attachment_image_tag member, :image, :fill, 40, 40, format: "jpeg", fallback: "game_icon.jpeg",size: "200x200",class:"rounded-circle border mt-3"%>
+  <%= attachment_image_tag member, :image, :fill, 40, 40, format: "jpg", fallback: "game_icon.jpg",size: "200x200",class:"rounded-circle border mt-3"%>
   <h2 class="mt-4"><%= member.name %></h2>
   <p><%= member.introduction %></p>
   <p>フォロー: <%= link_to member.follower.count, member_followers_index_path(member) %>　|　フォロワー: <%= link_to member.following.count, member_followings_index_path(member)%></p>
@@ -28,7 +28,7 @@
     <span class="pt-2 pl-2 pb-1">プレイ中のゲーム：<%= member.games.count %>個</span>
     <% playing_games.limit(3).each do |game| %>
       <%= link_to game_path(game),class:"text-decoration-none text-dark" do %>
-        <p class="pl-1 pt-1"><%= attachment_image_tag game, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "20x20"%>　<%= game.name %></p>
+        <p class="pl-1 pt-1"><%= attachment_image_tag game, :image, format: "jpg", fallback: "game_icon.jpg",size: "20x20"%>　<%= game.name %></p>
       <% end %>
     <% end %>
     <% if playing_games.count > 4 %>

@@ -2,7 +2,7 @@
   <div class="row">
 
     <div class="position-fixed col-3 mt-3 rounded-lg" style="background-color: #ecf2fd;">
-      <%= attachment_image_tag @game, :image, :fill, 40, 40, format: "jpeg", fallback: "game_icon.jpeg",size: "200x200",class:"rounded-circle border mt-3"%>
+      <%= attachment_image_tag @game, :image, :fill, 40, 40, format: "jpg", fallback: "game_icon.jpg",size: "200x200",class:"rounded-circle border mt-3"%>
       <h2 class="mt-4"><%= @game.name %></h2>
       <p><%= @game.introduction %></p>
       <p><%= @game.members.count%>人がプレイ中</p>

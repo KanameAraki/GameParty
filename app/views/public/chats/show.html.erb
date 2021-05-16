@@ -4,9 +4,9 @@
   <h4 class="my-4"><%= @member.name %>さんとのチャットルーム</h4>
   <% @chats.each do |chat| %>
    <% if chat.member_id == current_member.id %>
-    <p class="text-right"><%= chat.message %><%= attachment_image_tag current_member, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "30x30",class:"rounded-circle border"%></p><br>
+    <p class="text-right"><%= chat.message %><%= attachment_image_tag current_member, :image, format: "jpg", fallback: "game_icon.jpg",size: "30x30",class:"rounded-circle border"%></p><br>
    <% else %>
-    <p class="text-left"><%= attachment_image_tag chat.member, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "30x30",class:"rounded-circle border"%><%= chat.message %></p><br>
+    <p class="text-left"><%= attachment_image_tag chat.member, :image, format: "jpg", fallback: "game_icon.jpg",size: "30x30",class:"rounded-circle border"%><%= chat.message %></p><br>
    <% end %>
   <% end %>
   </div>
