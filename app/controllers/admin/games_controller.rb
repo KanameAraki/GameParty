@@ -4,6 +4,7 @@ class Admin::GamesController < ApplicationController
 
   def index
     @games = Game.all
+    @famous_games = Game.find(PlayingGame.group(:game_id).order("count(game_id) desc").limit(5).pluck(:game_id))
   end
 
   def show

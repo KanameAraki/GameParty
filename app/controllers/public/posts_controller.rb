@@ -11,7 +11,7 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-  # 　左側本人情報
+    #左側本人情報
     @member = current_member
     @playing_games = @member.games.order(created_at: :DESC)
     # 右側フォローした人の投稿
@@ -24,7 +24,6 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @comments = @post.comments
     @not_replies = @comments.where(reply: nil)
-    # binding.pry
     @new_comment = Comment.new
     @reply = Comment.new
   end
@@ -48,12 +47,10 @@ class Public::PostsController < ApplicationController
     post.destroy
     redirect_to posts_path
   end
-
+  # 募集投稿の締め切り
   def close
     post = Post.find(params[:post_id])
-    p post
     post.category = 2
-    p post
     post.save
     redirect_back(fallback_location: root_path)
   end

@@ -14,7 +14,7 @@ class Public::RelationshipsController < ApplicationController
     follow.following_id = Member.find(params[:member_id]).id
     follow.save
     redirect_back(fallback_location: root_path)
-
+  # 通知作成
     @member = Member.find(params[:member_id])
     @member.create_notification_follow!(current_member)
   end

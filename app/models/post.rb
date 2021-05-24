@@ -41,7 +41,6 @@ class Post < ApplicationRecord
    temp_ids.each do |temp_id|
        save_notification_comment!(current_member, comment_id, temp_id['member_id'])
    end
-   # binding.pry
    # まだ誰もコメントしていない場合は、投稿者に通知を送る
    save_notification_comment!(current_member, comment_id, member_id) if temp_ids.blank?
  end
@@ -54,7 +53,6 @@ class Post < ApplicationRecord
       visited_id: visited_id,
       action: 'comment'
     )
-    # binding.pry
     # 自分の投稿に対するコメントの場合は、通知済みとする
     if notification.visiter_id == notification.visited_id
       notification.checked = true
