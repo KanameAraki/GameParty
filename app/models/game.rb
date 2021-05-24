@@ -8,7 +8,8 @@ class Game < ApplicationRecord
   has_many :members, through: :playing_games
 
   attachment :image
-
+  
+  # 部分一致で検索
   def self.search(search)
     if search
       where("name LIKE ?","%#{search}%")

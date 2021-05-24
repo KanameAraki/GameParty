@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
+ # 管理者側deviseルーティング
   devise_for :admin, skip: :all
    devise_scope :admin do
      get "/admin/sign_in", to: "admin/sessions#new", as: :new_admin_session
      post "/admin/sign_in", to: "admin/sessions#create", as: :admin_session
      delete "/admin/sign_out", to: "admin/sessions#destroy", as: :destroy_admin_session
    end
-
+# メンバー側deviseルーティング
   devise_for :members, skip: :all
    devise_scope :member do
      get "/members/sign_up", to: "public/registrations#new", as: :new_member_registration
@@ -13,8 +14,9 @@ Rails.application.routes.draw do
      get "/members/sign_in", to: "public/sessions#new", as: :new_member_session
      post "/members/sign_in", to: "public/sessions#create", as: :member_session
      delete "/members/sign_out", to: "public/sessions#destroy", as: :destroy_member_session
+     post '/members/guest_sign_in', to: 'public/sessions#guest_sign_in'
    end
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+# メンバー側ルーティング
   scope module: :public do
     root :to => "homes#top"
     get "/about" => "homes#about"
@@ -40,7 +42,7 @@ Rails.application.routes.draw do
     resources :notifications,only:[:index], as: :notifications
     resources :announcements,only:[:index,:show]
   end
-
+# 管理者側ルーティング
   namespace :admin do
    resources :games
    resources :announcements,only:[:new,:create,:edit,:destroy]

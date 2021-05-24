@@ -2,46 +2,46 @@
   <div class="row">
     <div class="mx-auto">
       <h3 class="mt-5 mb-2 ml-3">通知一覧</h3>
-      <div class="border">
-      <% @notifications.each do |notice| %>
+      <div class="border overflow-auto" style="width:500px; height:500px;">
+        <% @notifications.each do |notice| %>
+          
+          <%  @member = Member.find(notice.visiter_id)
+            if notice.comment_id
+              @post = Post.find(notice.post_id)
+              @comment = Comment.find(notice.comment_id)
+            elsif notice.chat_id
+              @chat = Chat.find(notice.chat_id)
+            elsif notice.post_id != nil
+              @post = Post.find(notice.post_id)
+            end %>
 
-        <%  @member = Member.find(notice.visiter_id)
-          if notice.comment_id
-            @post = Post.find(notice.post_id)
-            @comment = Comment.find(notice.comment_id)
-          elsif notice.chat_id
-            @chat = Chat.find(notice.chat_id)
-          elsif notice.post_id != nil
-            @post = Post.find(notice.post_id)
-          end %>
-
-          <% case notice.action %>
-          <% when "follow" then %>
-          <p class="border-top pt-2 px-2">
-            <%= attachment_image_tag @member, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "30x30",class:"rounded-circle border"%>
-            <%=link_to @member.name,member_path(@member) %>さんからフォローされました
-          </p>
-          <% when "favorite" then %>
-          <p class="border-top pt-2 px-2">
-            <%= attachment_image_tag @member, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "30x30",class:"rounded-circle border"%>
-            <%=link_to @member.name,member_path(@member) %>さんが<%= link_to "あなたの投稿",post_path(@post)%>にいいねしました
-          </p>
-          <% when "comment" then %>
-          <% if @comment.member_id != current_member.id %>
-          <p class="border-top pt-2 px-2">
-            <%= attachment_image_tag @member, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "30x30",class:"rounded-circle border"%>
-            <%=link_to @member.name,member_path(@member) %>さんから<%= link_to "あなたの投稿",post_path(@post)%>にコメントがありました<br>
-          <span class="text-secondary ml-5"><%= @comment.content %></span>
-          </p>
+            <% case notice.action %>
+            <% when "follow" then %>
+            <p class="border-top pt-2 px-2">
+              <%= attachment_image_tag @member, :image, format: "jpeg", fallback: "member.jpeg",size: "30x30",class:"rounded-circle border"%>
+              <%=link_to @member.name,member_path(@member) %>さんからフォローされました
+            </p>
+            <% when "favorite" then %>
+            <p class="border-top pt-2 px-2">
+              <%= attachment_image_tag @member, :image, format: "jpeg", fallback: "member.jpeg",size: "30x30",class:"rounded-circle border"%>
+              <%=link_to @member.name,member_path(@member) %>さんが<%= link_to "あなたの投稿",post_path(@post)%>にいいねしました
+            </p>
+            <% when "comment" then %>
+            <% if @comment.member_id != current_member.id %>
+            <p class="border-top pt-2 px-2">
+              <%= attachment_image_tag @member, :image, format: "jpeg", fallback: "member.jpeg",size: "30x30",class:"rounded-circle border"%>
+              <%=link_to @member.name,member_path(@member) %>さんから<%= link_to "あなたの投稿",post_path(@post)%>にコメントがありました<br>
+            <span class="text-secondary ml-5"><%= @comment.content %></span>
+            </p>
+            <% end %>
+            <% when "dm" then %>
+            <p class="border-top pt-2 px-2">
+              <%= attachment_image_tag @member, :image, format: "jpeg", fallback: "member.jpeg",size: "30x30",class:"rounded-circle border"%>
+              <%=link_to @member.name,member_path(@member) %>さんからメッセージがあります<br>
+              <span class="text-secondary ml-5"><%= @chat.message %></span>
+            </p>
           <% end %>
-          <% when "dm" then %>
-          <p class="border-top pt-2 px-2">
-            <%= attachment_image_tag @member, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "30x30",class:"rounded-circle border"%>
-            <%=link_to @member.name,member_path(@member) %>さんからメッセージがあります<br>
-            <span class="text-secondary ml-5"><%= @chat.message %></span>
-          </p>
-          <% end %>
-      <% end %>
+        <% end %>
       </div>
     </div>
   </div>

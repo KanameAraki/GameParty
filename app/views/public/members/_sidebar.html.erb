@@ -1,5 +1,5 @@
 <div class="position-fixed col-3 mt-3 rounded-lg" style="background-color: #ecf2fd;">
-  <%= attachment_image_tag member, :image, :fill, 40, 40, format: "jpg", fallback: "game_icon.jpg",size: "200x200",class:"rounded-circle border mt-3"%>
+  <%= attachment_image_tag member, :image, :fill, 40, 40, format: "jpg", fallback: "member.jpg",size: "200x200",class:"rounded-circle border mt-3"%>
   <h2 class="mt-4"><%= member.name %></h2>
   <p><%= member.introduction %></p>
   <p>フォロー: <%= link_to member.follower.count, member_followers_index_path(member) %>　|　フォロワー: <%= link_to member.following.count, member_followings_index_path(member)%></p>
@@ -13,7 +13,7 @@
 
   <% if member_signed_in? %>
     <% if current_member == member %>
-      <%= link_to "編集",admin_member_close_path(current_member), class:"btn btn-success"%>
+      <%= link_to "編集",edit_member_path(current_member), class:"btn btn-success"%>
     <% elsif current_member.follower.exists?(following_id: member) %>
       <%= link_to "フォローを外す",member_relationships_path(member),method: :delete,class:"btn btn-primary"%>
     <% else %>

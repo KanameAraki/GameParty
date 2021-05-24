@@ -22,10 +22,20 @@
 
 
 
-// public/posts#show
-// $(function(){
+// コメントアイコン押下でコメントフォームが出現・消失
 $(document).on('turbolinks:load', function() {
   $('.comment-icon ').on('click', function(){
     $(this).parent().find(".comment-form").toggleClass("d-none");
   });
 });
+
+// ヘッダーホバーで吹き出し出現
+$(document).on('turbolinks:load', function() {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
+// チャットページのスクロールで最下部を表示
+$(document).on('turbolinks:load', function() {
+  var obj = $("#target");
+  $(obj).scrollTop(obj.get(0).scrollHeight);
+})

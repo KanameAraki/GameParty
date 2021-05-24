@@ -37,5 +37,6 @@ ja:
     failure:
       member:
         invalid: 入力内容に誤りがあります
+        inactive: このアカウントは使用できません
       admin:
         invalid: 入力内容に誤りがあります

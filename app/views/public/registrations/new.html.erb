@@ -4,17 +4,17 @@
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= render "public/shared/error_messages", resource: resource %>
         <h2 class="mt-5">新規登録</h2>
-    
+
         <div class="field form-group">
-          <%= f.label :name, "ニックネーム"%>
+          <%= f.label :name, "ニックネーム（10文字以内）"%>
           <%= f.text_field :name, autofocus: true, autocomplete: "name",class:"form-control"%>
         </div>
-    
+
         <div class="field form-group">
           <%= f.label :email, "メールアドレス" %>
           <%= f.email_field :email, autofocus: true, autocomplete: "email",class:"form-control" %>
         </div>
-    
+
         <div class="field form-group">
           <%= f.label :password , "パスワード"%>
           <% if @minimum_password_length %>
@@ -22,12 +22,12 @@
           <% end %>
           <%= f.password_field :password, autocomplete: "new-password",class:"form-control" %>
         </div>
-    
+
         <div class="field form-group">
           <%= f.label :password_confirmation, "パスワード（確認用）" %>
           <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control"%>
         </div>
-    
+
         <div class="actions text-right">
           <%= f.submit "新規登録", class:"btn btn-success"%>
         </div>

@@ -1,21 +1,35 @@
 <div class="container">
- <div class="row">
-  <div class="w-75 mx-auto">
-  <h4 class="my-4"><%= @member.name %>さんとのチャットルーム</h4>
-  <% @chats.each do |chat| %>
-   <% if chat.member_id == current_member.id %>
-    <p class="text-right"><%= chat.message %><%= attachment_image_tag current_member, :image, format: "jpg", fallback: "game_icon.jpg",size: "30x30",class:"rounded-circle border"%></p><br>
-   <% else %>
-    <p class="text-left"><%= attachment_image_tag chat.member, :image, format: "jpg", fallback: "game_icon.jpg",size: "30x30",class:"rounded-circle border"%><%= chat.message %></p><br>
-   <% end %>
-  <% end %>
+    <div class="row mx-auto">
+      <h4 class="my-4 mx-auto"><%= @member.name %>さんとのチャットルーム</h4>
+　  </div>
+<div class="row">
+  <div class="overflow-auto mx-auto" style="width:855px; height:500px;" id="target" >
+    <% @chats.each do |chat| %>
+      <% if chat.member_id == current_member.id %>
+        <span class="my-2 d-flex justify-content-end">
+          <div class="py-1 px-2 mw-50 rounded-pill text-break" style="background-color: #EEEEEE; max-width:400px;">
+            <%= safe_join(chat.message.split("\n"),tag(:br))%>
+          </div>
+          <%= attachment_image_tag current_member, :image, format: "jpg", fallback: "member.jpg",size: "30x30",class:"ml-1 rounded-circle border"%>
+        </span><br>
+        <% else %>
+        <div class="my-2 d-flex justify-content-start">
+          <%= attachment_image_tag current_member, :image, format: "jpg", fallback: "member.jpg",size: "30x30",class:"ml-1 rounded-circle border"%>
+          <div class="py-1 px-2 mw-50 rounded-pill text-break" style="background-color: #EEEEEE; max-width:400px;">
+            <%= safe_join(chat.message.split("\n"),tag(:br))%>
+          </div>
+        </div><br>
+      <% end %>
+    <% end %>
   </div>
- </div>
 </div>
-<div class="mx-auto text-center">
+
+<div class="row justify-content-center">
   <%= form_with model:@chat do |f|%>
-  <%= f.text_field :message, size:"50"%>
-  <%= f.hidden_field :room_id %>
-  <%= f.submit "送信", class:"btn btn-success"%>
+    <%= f.text_area :message, size:"50x1"%>
+    <%= f.hidden_field :room_id %>
+    <%= f.submit "送信", class:"btn btn-success mb-3"%>
   <% end %>
+</div>
+
 </div>

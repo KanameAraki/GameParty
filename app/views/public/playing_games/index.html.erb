@@ -16,6 +16,7 @@
               </span>
             <% end %>
             </td>
+            <% if member_signed_in? %>
             <td class="text-right">
               <% if current_member.playing_games.exists?(game_id: game.id) %>
                 <%= link_to "削除", member_playing_games_path(member_id: current_member.id,game_id: game.id), method: :delete,class:"btn btn-danger"%>
@@ -23,6 +24,7 @@
                 <%= link_to "追加", member_playing_games_path(member_id: current_member.id,game_id: game.id), method: :post,class:"btn btn-success"%>
               <% end %>
             </td>
+            <% end %>
           </tr>
         <% end %>
       </table>
