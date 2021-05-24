@@ -1,11 +1,17 @@
 <div class="container">
   <div class="row">
+    <div class="col-12 mx-auto text-center">
       <div class="mx-auto pr-5 mt-3">
-　　　<%= image_tag "title.jpg", :size =>'600x400'%>
+　　　  <%= image_tag "title.jpg", :size =>'600x400'%>
       </div>
-      <div class="mx-auto">
+      <% unless member_signed_in?||admin_signed_in? %>
+        <div>
+          <%= link_to 'ゲストログイン（閲覧用）', members_guest_sign_in_path, method: :post, class:"btn btn-default border"%>
+        </div>
+      <% end %>
+      <div class="w-100">
       　<h4 class="text-center">お知らせ（<%= link_to "一覧を見る", announcements_path%>）</h4>
-        <table class="teble table-bordered">
+        <table class="teble table-bordered mx-auto w-75">
           <tr class="bg-light">
             <th>日時</th>
             <th>タイトル</th>
@@ -20,5 +26,6 @@
           <% end %>
         </table>
       </div>
+    </div>
   </div>
 </div>

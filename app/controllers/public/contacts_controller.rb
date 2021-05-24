@@ -12,6 +12,7 @@ class Public::ContactsController < ApplicationController
     end
   end
 
+  # 内容を維持したまま入力画面に戻る
   def back
     @contact = Contact.new(contact_params)
     render :new

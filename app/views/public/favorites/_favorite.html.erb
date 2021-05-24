@@ -1,5 +1,13 @@
 <% if current_member.favorites.exists?(post_id: post.id) %>
-  <span><%= link_to "❤️",post_favorites_path(post.id),method: :delete, class:"text-decoration-none mr-2", remote: true %><%= post.favorites.count %>いいね</span>
+  <span>
+    <%= link_to post_favorites_path(post.id),method: :delete, class:"text-decoration-none mr-2", remote: true do %>
+    <i class="fas fa-heart" style="color: red;"> <%= post.favorites.count %></i>
+    <% end %>
+  </span>
 <% else %>
-  <span><%= link_to "♡",post_favorites_path(post.id),method: :post, class:"text-decoration-none mr-2", remote: true %><%= post.favorites.count %>いいね</span>
+  <span>
+    <%= link_to post_favorites_path(post.id),method: :post, class:"text-decoration-none mr-2", remote: true do %>
+    <i class="far fa-heart"> <%= post.favorites.count %></i>
+    <% end %>
+  </span>
 <% end %>

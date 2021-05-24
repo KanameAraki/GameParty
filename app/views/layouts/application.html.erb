@@ -29,37 +29,40 @@
                 <%= link_to "お知らせ作成", new_admin_announcement_path,class:"nav-link text-dark btn btn-light"%>
               </li>
             <% elsif member_signed_in? %>
-              <li class="nav-item mr-2">
+              <li class="nav-item mr-2" data-toggle="tooltip" data-placement="bottom" title="お問い合わせ">
                 <%= link_to new_contact_path,class:"nav-link text-dark btn btn-light" do %>
                 <i class="fas fa-envelope"></i>
                 <% end %>
               </li>
-              <li class="nav-item mr-2">
+              <li class="nav-item mr-2 header_tooltip" data-toggle="tooltip" data-placement="bottom" title="新規投稿">
                 <%= link_to new_post_path,class:"nav-link text-dark btn btn-light" do%>
                 <i class="fas fa-plus"></i>
                 <% end %>
               </li>
-              <li class="nav-item mr-2">
+              <li class="nav-item mr-2 header_tooltip" data-toggle="tooltip" data-placement="bottom" title="フォロー投稿">
                 <%= link_to posts_path,class:"nav-link text-dark btn btn-light" do %>
                 <i class="fas fa-users"></i>
                 <% end %>
               </li>
-              <li class="nav-item mr-2">
+              <li class="nav-item mr-2 header_tooltip" data-toggle="tooltip" data-placement="bottom" title="ゲーム一覧">
                 <%= link_to games_path,class:"nav-link text-dark btn btn-light" do %>
                 <i class="fas fa-gamepad"></i>
                 <% end %>
               </li>
-              <li class="nav-item mr-2">
+              <% if unchecked_notifications.any? %>
+                <i class="fa fa-circle" style="color: red;"></i>
+              <% end %>
+              <li class="nav-item mr-2 header_tooltip"  data-toggle="tooltip" data-placement="bottom" title="通知">
                 <%= link_to notifications_path,class:"nav-link text-dark btn btn-light" do%>
                 <i class="fas fa-bell"></i>
                 <% end %>
               </li>
-              <li class="nav-item mr-2">
+              <li class="nav-item mr-2 header_tooltip" data-toggle="tooltip" data-placement="bottom" title="マイページ">
                 <%= link_to member_path(current_member),class:"nav-link btn btn-light",style:"height: 42px;" do%>
-                <%= attachment_image_tag current_member, :image, format: "jpeg", fallback: "game_icon.jpeg",size: "30x30",class:"rounded-circle border"%>
+                <%= attachment_image_tag current_member, :image, format: "jpeg", fallback: "member.jpeg",size: "30x30",class:"rounded-circle border"%>
                 <% end %>
               </li>
-              <li class="nav-item mr-2">
+              <li class="nav-item mr-2 header_tooltip" data-toggle="tooltip" data-placement="bottom" title="ログアウト">
                 <%= link_to destroy_member_session_path, method: :delete,class:"nav-link text-dark btn btn-light",data: {confirm:"ログアウトしますか？",cancel:"やめる",commit:"ログアウト"},title:"確認" do %>
                 <i class="fas fa-sign-out-alt"></i>
                 <% end %>

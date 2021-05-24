@@ -8,7 +8,7 @@ class Public::CommentsController < ApplicationController
     comment = Comment.new(comment_params)
     comment.member_id = current_member.id
     comment.post_id = post.id
-    # binding.pry
+    # 通知の作成
     if comment.save
       post.create_notification_comment!(current_member, comment.id)
       @post = post
@@ -25,12 +25,20 @@ class Public::CommentsController < ApplicationController
       @empty_comment = comment
       @new_comment = Comment.new
       @reply = Comment.new
-      # binding.pry
       render "public/posts/show"
     end
   end
 
   def destroy
+    comment = Comment.find(params[:id])
+    comment.destroy
+    @post = Post.find(params[:post_id])
+    @comments = @post.comments
+    @not_replies = @comments.where(reply: nil)
+    @empty_comment = comment
+    @new_comment = Comment.new
+    @reply = Comment.new
+    render "public/posts/show"
   end
 
   private
