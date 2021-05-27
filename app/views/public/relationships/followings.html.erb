@@ -7,13 +7,13 @@
           <tr>
             <td>
               <%= link_to member_path(following) do %>
-                <%= attachment_image_tag following, :image, format: "jpg", fallback: "member.jpg",size: "30x30",class:"rounded-circle border"%>
+                <%= attachment_image_tag following, :image, format: "jpg", fallback: "member_img.jpg",size: "30x30",class:"rounded-circle border"%>
               <% end %>
             </td>
             <td>
               <%= link_to following.name, member_path(following), class:"text-decoration-none text-dark"%>
             </td>
-            <% if member_signed_in? %>
+            <% if member_signed_in? && (following != current_member) && current_member.email !='guest@example.com'%>
             <td>
               <% if current_member.follower.exists?(following_id: following) %>
               <%= link_to "フォローを外す",member_relationships_path(following),method: :delete,class:"btn btn-primary"%>
