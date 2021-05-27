@@ -11,7 +11,7 @@ class Public::GamesController < ApplicationController
       @famous_games = Game.find(PlayingGame.group(:game_id).order("count(game_id) desc").limit(5).pluck(:game_id))
     else
     #ゲーム人気ランキング
-    @famous_games = Game.find(PlayingGame.group(:game_id).order("count(game_id) desc").limit(5).pluck(:game_id))
+      @famous_games = Game.find(PlayingGame.group(:game_id).order("count(game_id) desc").limit(5).pluck(:game_id))
     end
   end
 

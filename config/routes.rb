@@ -45,7 +45,7 @@ Rails.application.routes.draw do
 # 管理者側ルーティング
   namespace :admin do
    resources :games
-   resources :announcements,only:[:new,:create,:edit,:destroy]
+   resources :announcements,only:[:new,:create,:edit,:update,:destroy]
    resources :members,only:[:index] do
      patch "/close", to: "members#close"
    end

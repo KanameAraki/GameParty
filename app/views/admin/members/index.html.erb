@@ -8,31 +8,35 @@
   </div>
 
   <div class="row">
-    <table class="table w-50 text-left mx-auto">
-      <tr class="thead-light">
-        <th></th>
-        <th>メンバー名</th>
-        <th></th>
-      </tr>
-      <% @members.each do |member|%>
-      <tr>
-        <td class="pt-3">
-          <%= link_to member_path(member),class:"text-decoration-none" do %>
-             <%= attachment_image_tag member, :image, format: "jpg", fallback: "member.jpg",size: "30x30"%>
-          <% end %>
-        </td>
-        <td><%= link_to member.name,member_path(member),class:"text-dark text-decoration-none"%></td>
-        <td class="text-right">
-          <% if admin_signed_in? %>
-            <%if member.is_deleted? %>
-              <%= link_to "凍結を解除", admin_member_close_path(member), method: :patch, class:"btn btn-primary",data: {confirm:"メンバーの凍結を解除しますか？",cancel:"やめる",commit:"解除する"},title:"確認"%>
-            <% else%>
-              <%= link_to "凍結させる", admin_member_close_path(member), method: :patch, class:"btn btn-danger",data: {confirm:"メンバーを凍結させますか？",cancel:"やめる",commit:"凍結させる"},title:"確認"%>
+    <table class="table w-50 text-left mx-auto border">
+      <thead class="thead-light d-block" style="width:568px;">
+        <tr class="thead-light">
+          <th style="width:100px;"></th>
+          <th style="width:268px;">メンバー名</th>
+          <th style="width:200px;"></th>
+        </tr>
+      </thead>
+      <tbody class="overflow-auto d-block" style="height:400px; width:568px;">
+        <% @members.each do |member|%>
+        <tr>
+          <td class="pt-3" style="width:100px;">
+            <%= link_to member_path(member),class:"text-decoration-none" do %>
+               <%= attachment_image_tag member, :image, format: "jpg", fallback: "member_img.jpg",size: "30x30"%>
             <% end %>
-          <%end%>
-        </td>
-      </tr>
-      <% end %>
+          </td>
+          <td style="width:268px;"><%= link_to member.name,member_path(member),class:"text-dark text-decoration-none"%></td>
+          <td class="text-right" style="width:200px;">
+            <% if admin_signed_in? %>
+              <%if member.is_deleted? %>
+                <%= link_to "凍結を解除", admin_member_close_path(member), method: :patch, class:"btn btn-primary",data: {confirm:"メンバーの凍結を解除しますか？",cancel:"やめる",commit:"解除する"},title:"確認"%>
+              <% else%>
+                <%= link_to "凍結させる", admin_member_close_path(member), method: :patch, class:"btn btn-danger",data: {confirm:"メンバーを凍結させますか？",cancel:"やめる",commit:"凍結させる"},title:"確認"%>
+              <% end %>
+            <%end%>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
     </table>
   </div>
 </div>

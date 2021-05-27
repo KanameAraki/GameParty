@@ -18,25 +18,25 @@
             <% case notice.action %>
             <% when "follow" then %>
             <p class="border-top pt-2 px-2">
-              <%= attachment_image_tag @member, :image, format: "jpg", fallback: "member.jpg",size: "30x30",class:"rounded-circle border"%>
+              <%= attachment_image_tag @member, :image, format: "jpg", fallback: "member_img.jpg",size: "30x30",class:"rounded-circle border"%>
               <%=link_to @member.name,member_path(@member) %>さんからフォローされました
             </p>
             <% when "favorite" then %>
             <p class="border-top pt-2 px-2">
-              <%= attachment_image_tag @member, :image, format: "jpg", fallback: "member.jpg",size: "30x30",class:"rounded-circle border"%>
+              <%= attachment_image_tag @member, :image, format: "jpg", fallback: "member_img.jpg",size: "30x30",class:"rounded-circle border"%>
               <%=link_to @member.name,member_path(@member) %>さんが<%= link_to "あなたの投稿",post_path(@post)%>にいいねしました
             </p>
             <% when "comment" then %>
             <% if @comment.member_id != current_member.id %>
             <p class="border-top pt-2 px-2">
-              <%= attachment_image_tag @member, :image, format: "jpg", fallback: "member.jpg",size: "30x30",class:"rounded-circle border"%>
+              <%= attachment_image_tag @member, :image, format: "jpg", fallback: "member_img.jpg",size: "30x30",class:"rounded-circle border"%>
               <%=link_to @member.name,member_path(@member) %>さんから<%= link_to "あなたの投稿",post_path(@post)%>にコメントがありました<br>
             <span class="text-secondary ml-5"><%= @comment.content %></span>
             </p>
             <% end %>
             <% when "dm" then %>
             <p class="border-top pt-2 px-2">
-              <%= attachment_image_tag @member, :image, format: "jpg", fallback: "member.jpg",size: "30x30",class:"rounded-circle border"%>
+              <%= attachment_image_tag @member, :image, format: "jpg", fallback: "member_img.jpg",size: "30x30",class:"rounded-circle border"%>
               <%=link_to @member.name,member_path(@member) %>さんからメッセージがあります<br>
               <span class="text-secondary ml-5"><%= @chat.message %></span>
             </p>

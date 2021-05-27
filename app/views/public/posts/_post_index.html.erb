@@ -3,7 +3,7 @@
   <div class="border rounded-lg mt-3">
     <div class="d-flex mt-2 ml-2">
       <%= link_to member_path(post.member),class:"text-dark text-decoration-none" do%>
-        <p class="text-decoration-none"><%= attachment_image_tag post.member, :image, format: "jpg", fallback: "member.jpg",size: "30x30",class:"rounded-circle border"%>
+        <p class="text-decoration-none"><%= attachment_image_tag post.member, :image, format: "jpg", fallback: "member_img.jpg",size: "30x30",class:"rounded-circle border"%>
         <%= post.member.name %></p>
       <% end %>
       <div class="ml-auto mr-2">

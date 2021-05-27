@@ -1,5 +1,5 @@
 class Admin::AnnouncementsController < ApplicationController
-  
+
   before_action :authenticate_admin!
 
   def new
@@ -14,6 +14,22 @@ class Admin::AnnouncementsController < ApplicationController
       @announcement = announcement
       render "new"
     end
+  end
+
+  def edit
+    @announcement = Announcement.find(params[:id])
+  end
+  
+  def update
+    announcement = Announcement.find(params[:id])
+    announcement.update(announcement_params)
+    redirect_to announcement_path(announcement)
+  end
+
+  def destroy
+    announcement = Announcement.find(params[:id])
+    announcement.destroy
+    redirect_to announcements_path
   end
 
   private
