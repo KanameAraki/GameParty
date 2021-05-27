@@ -3,18 +3,18 @@
       <h4 class="my-4 mx-auto"><%= @member.name %>さんとのチャットルーム</h4>
 　  </div>
 <div class="row">
-  <div class="overflow-auto mx-auto" style="width:855px; height:500px;" id="target" >
+  <div class="overflow-auto mx-auto border" style="width:855px; height:500px;" id="target" >
     <% @chats.each do |chat| %>
       <% if chat.member_id == current_member.id %>
-        <span class="my-2 d-flex justify-content-end">
+        <span class="my-2 d-flex justify-content-end mr-2">
           <div class="py-1 px-2 mw-50 rounded-pill text-break" style="background-color: #EEEEEE; max-width:400px;">
             <%= safe_join(chat.message.split("\n"),tag(:br))%>
           </div>
-          <%= attachment_image_tag current_member, :image, format: "jpg", fallback: "member.jpg",size: "30x30",class:"ml-1 rounded-circle border"%>
+          <%= attachment_image_tag current_member, :image, format: "jpg", fallback: "member_img.jpg",size: "30x30",class:"ml-1 rounded-circle border"%>
         </span><br>
         <% else %>
-        <div class="my-2 d-flex justify-content-start">
-          <%= attachment_image_tag current_member, :image, format: "jpg", fallback: "member.jpg",size: "30x30",class:"ml-1 rounded-circle border"%>
+        <div class="my-2 d-flex justify-content-start ml-2">
+          <%= attachment_image_tag chat.member, :image, format: "jpg", fallback: "member_img.jpg",size: "30x30",class:"ml-1 rounded-circle border"%>
           <div class="py-1 px-2 mw-50 rounded-pill text-break" style="background-color: #EEEEEE; max-width:400px;">
             <%= safe_join(chat.message.split("\n"),tag(:br))%>
           </div>

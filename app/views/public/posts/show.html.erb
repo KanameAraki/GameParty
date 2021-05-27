@@ -4,7 +4,7 @@
       <!--投稿上部-->
       <div class="d-flex mt-2 ml-2">
         <%= link_to member_path(@post.member),class:"text-dark text-decoration-none" do%>
-         <p class="text-decoration-none"><%= attachment_image_tag @post.member, :image, format: "jpg", fallback: "member.jpg",size: "30x30",class:"rounded-circle border"%>
+         <p class="text-decoration-none"><%= attachment_image_tag @post.member, :image, format: "jpg", fallback: "member_img.jpg",size: "30x30",class:"rounded-circle border"%>
          <%= @post.member.name %></p>
         <% end %>
         <div class="ml-auto mr-2">
@@ -57,7 +57,7 @@
       <div class="border rounded-lg mt-3 w-75 mx-auto pt-2 pl-2">
         <%= link_to member_path(comment.member),class:"text-dark text-decoration-none" do%>
           <span class="text-decoration-none">
-            <%= attachment_image_tag comment.member, :image, format: "jpg", fallback: "member.jpg",size: "30x30",class:"rounded-circle border"%>
+            <%= attachment_image_tag comment.member, :image, format: "jpg", fallback: "member_img.jpg",size: "30x30",class:"rounded-circle border"%>
             <%= comment.member.name %>：
           </span>
         <% end %>
@@ -87,7 +87,7 @@
             <% comment.replies.each do |reply| %>
               <p class="border-top pt-3 pl-3">
                 <%= link_to member_path(reply.member),class:"text-dark text-decoration-none" do%>
-                  <%= attachment_image_tag reply.member, :image, format: "jpg", fallback: "member.jpg",size: "30x30",class:"rounded-circle border"%>
+                  <%= attachment_image_tag reply.member, :image, format: "jpg", fallback: "member_img.jpg",size: "30x30",class:"rounded-circle border"%>
                   <%= reply.member.name %>
                 <% end %>
                 ：<%= reply.content %>

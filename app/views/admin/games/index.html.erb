@@ -5,7 +5,7 @@
       <div class="d-flex justify-content-center my-5">
 
         <h3 class="mr-5">ゲーム一覧</h3>
-        <%= form_with url: games_path,method: :get, local: true do |f| %>
+        <%= form_with url: admin_games_path,method: :get, local: true do |f| %>
           <%= f.text_field :search, value: params[:search] %>
           <%= f.submit "検索", name: nil %>
         <% end %>
@@ -28,7 +28,7 @@
             <% end %>
           </td>
           <td class="text-right" style="width:90px;">
-  　　　　　<%= link_to "編集する", edit_admin_game_path(game) %>
+            <%= link_to "編集", edit_admin_game_path(game), class:"btn btn-success"%>
           </td>
         </tr>
         <% end %>

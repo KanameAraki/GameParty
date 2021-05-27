@@ -42,7 +42,7 @@ class Member < ApplicationRecord
   def following?(user_id)
     following_user.include?(user_id)
   end
-  
+
   # フォロー通知
   def create_notification_follow!(current_member)
     temp = Notification.where(["visiter_id = ? and visited_id = ? and action = ? ",current_member.id, id, 'follow'])
@@ -62,7 +62,7 @@ class Member < ApplicationRecord
       all
     end
   end
-
+  # 論理削除済みは弾く
   def active_for_authentication?
     super && (self.is_deleted == false)
   end
@@ -73,7 +73,6 @@ class Member < ApplicationRecord
       member.name = "ゲストユーザー"
     end
   end
-
 
 
 end
