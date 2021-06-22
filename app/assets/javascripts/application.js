@@ -35,6 +35,7 @@ $(document).on('turbolinks:load', function() {
 })
 
 // チャットページのスクロールで最下部を表示
+
 $(document).on('turbolinks:load', function() {
   if(document.URL.match(/chats/)){
     var obj = $("#target");
